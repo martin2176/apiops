@@ -1,2 +1,18 @@
 apiNames:
   - test
+backendNames:
+  - none
+diagnosticNames:
+  - none
+loggerNames:
+  - none
+namedValueNames:
+  - none
+productNames:
+  - none
+subscriptionNames:
+  - none
+tagNames:
+  - none
+policyFragmentNames:
+  - none
