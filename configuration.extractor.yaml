@@ -16,7 +16,7 @@ tagNames:
   - none
 policyFragmentNames:
   - none
-apiVersionSets:
+apiVersionSetNames:
   - none
-groups:
+groupNames:
   - none
