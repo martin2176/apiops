@@ -36,7 +36,9 @@ jobs:
    steps:
     - name: printcommitid
       id: printcommitid
-      run: echo ${{ needs.get-commit.outputs.commit_id }}
+      env: 
+       commitid11: ${{ needs.get-commit.outputs.commit_id }}
+      run: echo "$commitid11"
 #Publish with Commit ID
   Push-Changes-To-APIM-Dev-With-Commit-ID:
     if: (github.event.inputs.COMMIT_ID_CHOICE == 'publish-artifacts-in-last-commit' || github.event.inputs.COMMIT_ID_CHOICE == '')
