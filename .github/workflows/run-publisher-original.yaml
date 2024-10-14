@@ -33,11 +33,7 @@ jobs:
       commit_id: ${{ steps.commit.outputs.commit_id }}
 
 
-  yo-yo:
-   steps:
-       - name: printcommitid
-        id: printcommitid
-        run: echo ${{ needs.get-commit.outputs.commit_id }}
+
 
   #Publish with Commit ID
   Push-Changes-To-APIM-Dev-With-Commit-ID:
