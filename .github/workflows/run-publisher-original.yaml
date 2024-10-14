@@ -34,7 +34,6 @@ jobs:
 
 
   yo-yo:
-   runs-on: ubuntu-latest
    steps:
        - name: printcommitid
         id: printcommitid
