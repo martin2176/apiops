@@ -28,6 +28,10 @@ jobs:
         run: echo "commit_id=${GITHUB_SHA}" >> $GITHUB_ENV
     outputs:
       commit_id: ${{ steps.commit.outputs.commit_id }}
+      - name: printcommitid
+        id: printcommitid
+        run: echo "commit_id=${GITHUB_SHA}"   
+      
   #Publish with Commit ID
   Push-Changes-To-APIM-Dev-With-Commit-ID:
     if: (github.event.inputs.COMMIT_ID_CHOICE == 'publish-artifacts-in-last-commit' || github.event.inputs.COMMIT_ID_CHOICE == '')
