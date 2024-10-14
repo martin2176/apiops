@@ -6,5 +6,4 @@ namedValues:
       value: "production"
 apis:
   - name: test
-    properties:
-      displayName: testapiinproduction
+    displayName: testapiinproduction
