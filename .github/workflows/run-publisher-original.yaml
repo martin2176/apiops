@@ -33,6 +33,7 @@ jobs:
       commit_id: ${{ steps.commit.outputs.commit_id }}
   yo-yo:
    runs-on: ubuntu-latest
+   needs: get-commit
    steps:
     - name: printcommitid
       id: printcommitid
