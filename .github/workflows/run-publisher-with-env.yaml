@@ -26,6 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
     steps:
+      - name: printcommitid
+        id: printcommitid
+        run: echo $COMMIT_ID      
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
         with:
