@@ -1,4 +1,4 @@
-apimServiceName: martinapimext
+apimServiceName: prod
 namedValues:
   - name: environment
     properties:
