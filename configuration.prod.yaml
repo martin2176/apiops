@@ -7,5 +7,4 @@ namedValues:
 apis:
   - name: test
     properites:
-      path: "/testprod"
-      displayName: "testapiinproduction11"
+      displayName: "testapiinproduction111"
