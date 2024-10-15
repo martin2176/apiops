@@ -14,9 +14,7 @@ subscriptionNames:
   - none
 tagNames:
   - none
-policyFragmentNames:
-  - none
-apiVersionSetNames:
-  - none
+PolicyFragmentNames:  [ ignore]
+apiVersionSetNames: [ ignore]
 groupNames:
   - none
