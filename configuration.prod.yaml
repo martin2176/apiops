@@ -12,6 +12,7 @@ apis:
     authenticationSettings: {}
     description: 'hello there'
     displayName: hellothereinprod
+namedValues:
  - name: testSecret
    properties:
      displayName: testSecret
