@@ -1,11 +1,11 @@
 {
   "properties": {
-    "path": "test1",
+    "path": "testprod",
     "apiRevision": "1",
     "authenticationSettings": {},
     "description": "",
     "isCurrent": true,
-    "displayName": "testapiindevelopment",
+    "displayName": "hellothereinprod",
     "protocols": [
       "https"
     ],
