@@ -3,6 +3,6 @@
     "displayName": "environment",
     "secret": false,
     "tags": [],
-    "value": "development"
+    "value": "production"
   }
 }
