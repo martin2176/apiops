@@ -4,6 +4,10 @@ namedValues:
     properties:
       displayName: environment
       value: "production"
+  - name: testSecret
+    properties:
+      displayName: testSecret
+      value: "{#testSecretValue#}"         
 apis:
  - name: test
    properties:
@@ -12,8 +16,3 @@ apis:
     authenticationSettings: {}
     description: 'hello there'
     displayName: hellothereinprod
-namedValues:
- - name: testSecret
-   properties:
-     displayName: testSecret
-     value: "{#testSecretValue#}"   
