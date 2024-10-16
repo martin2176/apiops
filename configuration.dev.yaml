@@ -1,0 +1,6 @@
+apimServiceName: dev
+namedValues:
+  - name: testSecret
+    properties:
+      displayName: testSecret
+      value: "{#testSecretValue#}"
