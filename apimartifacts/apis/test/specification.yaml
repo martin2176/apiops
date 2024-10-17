@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
-  title: hellothereinprod
+  title: Swagger Petstore
   license:
     name: MIT
   version: '1.0'
 servers:
-  - url: https://martinapimext.azure-api.net/testprod
+  - url: http://martinapimext.azure-api.net/testprod
 paths:
   /pets:
     get:
@@ -38,85 +38,6 @@ paths:
                 - id: 0
                   name: string
                   tag: string
-        '400':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
-        '500':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
-    post:
-      tags:
-        - pets
-      summary: Create a pet
-      description: Create a pet
-      operationId: createPets
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pet'
-            example:
-              id: 0
-              name: string
-              tag: string
-      responses:
-        '201':
-          description: Null response
-        '400':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
-        '500':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
-  '/pets/{petId}':
-    get:
-      tags:
-        - pets
-      summary: Info for a specific pet
-      description: Info for a specific pet
-      operationId: showPetById
-      parameters:
-        - name: petId
-          in: path
-          description: The id of the pet to retrieve
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pet'
-              example:
-                id: 0
-                name: string
-                tag: string
         '400':
           description: unexpected error
           content:
