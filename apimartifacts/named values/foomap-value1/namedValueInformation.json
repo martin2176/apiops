@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "displayName": "foomap-value1",
+    "secret": false,
+    "tags": [],
+    "value": "bar"
+  }
+}
