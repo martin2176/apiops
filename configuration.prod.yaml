@@ -16,3 +16,5 @@ apis:
     authenticationSettings: {}
     description: 'hello there'
     displayName: hellothereinprod
+    format:  openapi-link
+    value: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/refs/heads/main/examples/v3.0/petstore.yaml
