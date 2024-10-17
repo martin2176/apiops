@@ -3,8 +3,10 @@
     "path": "testprod",
     "apiRevision": "1",
     "authenticationSettings": {},
-    "description": "",
     "isCurrent": true,
+    "license": {
+      "name": "MIT"
+    },
     "displayName": "hellothereinprod",
     "protocols": [
       "https"

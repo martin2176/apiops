@@ -1,0 +1,27 @@
+<fragment>
+	<send-request ignore-error="false" timeout="10" response-variable-name="idpaccesstoken" mode="new">
+		<set-url>https://login.microsoftonline.com/21c9315b-cdc8-41c8-b30d-d4da2c5a804b/oauth2/v2.0/token</set-url>
+		<set-method>POST</set-method>
+		<set-header name="Content-Type" exists-action="override">
+			<value>application/x-www-form-urlencoded</value>
+		</set-header>
+		<!-- <set-body>@("client_id=5e4c51f1-f24f-46a5-b79f-b4b2562c7f20&username=russell%40martin2176outlook.onmicrosoft.com&password=barT2176%23&grant_type=password&scope=user.read%20openid%20profile%20offline_access")</set-body> -->
+		<set-body>@("client_id="+"{{sf-clientid}}"+"&username="+(System.Net.WebUtility.UrlEncode((string)context.Variables["username"]))+"&password="+(System.Net.WebUtility.UrlEncode((string)context.Variables["password"]))+"&grant_type="+(System.Net.WebUtility.UrlEncode((string)context.Variables["grant_type"]))+"&scope=user.read%20openid%20profile%20offline_access")</set-body>
+	</send-request>
+	<set-variable name="returnstatusdescription" value="@(((IResponse)context.Variables["idpaccesstoken"]).Body.As<JObject>(preserveContent: true).ToString())" />
+	<choose>
+		<when condition="@(((IResponse)context.Variables["idpaccesstoken"]).StatusCode != 200)">
+			<return-response>
+				<set-status code="500" />
+				<set-header name="Content-Type" exists-action="override">
+					<value>application/json</value>
+				</set-header>
+				<set-body template="liquid">
+        {
+           "status": {{context.Variables["returnstatusdescription"]}}
+        }
+        </set-body>
+			</return-response>
+		</when>
+	</choose>
+</fragment>

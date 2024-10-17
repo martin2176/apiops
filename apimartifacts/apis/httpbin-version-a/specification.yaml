@@ -1,0 +1,56 @@
+openapi: 3.0.1
+info:
+  title: httpbin
+  description: ''
+  version: version-a
+servers:
+  - url: https://martinapimext.azure-api.net/httpbin/version-a
+paths:
+  /get:
+    get:
+      summary: FetchData
+      description: FetchData
+      operationId: getrequestheaders
+      responses:
+        '200':
+          description: 
+  /status/*:
+    get:
+      summary: GetStatus
+      operationId: getstatusGetStatus
+      responses:
+        '200':
+          description: 
+  /*:
+    get:
+      summary: WildcardGet
+      operationId: wildcardget
+      responses:
+        '200':
+          description: 
+  '/anything/{anything}':
+    get:
+      summary: anything
+      operationId: anything
+      parameters:
+        - name: anything
+          in: path
+          required: true
+          schema:
+            type: ''
+      responses:
+        '200':
+          description: 
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

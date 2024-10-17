@@ -1,0 +1,35 @@
+openapi: 3.0.1
+info:
+  title: msgraph
+  description: ''
+  version: '1.0'
+servers:
+  - url: https://martinapimext.azure-api.net/msgraph
+paths:
+  /me:
+    get:
+      summary: getprofile
+      operationId: getprofile
+      responses:
+        '200':
+          description: 
+  /me/joinedTeams:
+    get:
+      summary: getJoinedTeams
+      operationId: getjoinedteams
+      responses:
+        '200':
+          description: 
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

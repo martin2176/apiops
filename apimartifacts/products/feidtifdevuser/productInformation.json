@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "displayName": "feidtifdevuser",
+    "description": "This is API bundle for FEID TIF DEV USERS",
+    "approvalRequired": false,
+    "state": "published",
+    "subscriptionRequired": true
+  }
+}
