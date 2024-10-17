@@ -1,8 +1,0 @@
-{
-  "properties": {
-    "description": "azurewebappistiodemo",
-    "protocol": "http",
-    "resourceId": "https://management.azure.com/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/azurewebappistiodemo/providers/Microsoft.Web/sites/azurewebappistiodemo",
-    "url": "https://azurewebappistiodemo.azurewebsites.net"
-  }
-}

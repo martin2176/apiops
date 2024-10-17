@@ -1,9 +1,0 @@
-{
-  "properties": {
-    "displayName": "tremble creds api",
-    "description": "trembles creds api",
-    "approvalRequired": false,
-    "state": "published",
-    "subscriptionRequired": true
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "properties": {
-    "displayName": "MYSECRET",
-    "secret": true,
-    "tags": []
-  }
-}

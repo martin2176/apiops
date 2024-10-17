@@ -1,9 +1,0 @@
-{
-  "properties": {
-    "displayName": "tremble",
-    "scope": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/products/tremble",
-    "allowTracing": false,
-    "ownerId": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/users/66e1d1eafb42680d38dd57c8",
-    "state": "active"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "properties": {
-    "displayName": "feidtifdevuserscopedsub",
-    "scope": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/products/feidtifdevuser",
-    "allowTracing": false,
-    "state": "active"
-  }
-}
