@@ -7,10 +7,11 @@
     "license": {
       "name": "MIT"
     },
-    "displayName": "Swagger Petstore",
+    "displayName": "hellothereinprod",
     "protocols": [
-      "http"
+      "https"
     ],
+    "serviceUrl": "https://martinapimext.azure-api.net/test1",
     "subscriptionKeyParameterNames": {
       "header": "Ocp-Apim-Subscription-Key",
       "query": "subscription-key"
