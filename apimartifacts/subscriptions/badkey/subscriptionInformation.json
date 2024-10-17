@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "displayName": "badkey",
+    "scope": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/products/te-product",
+    "allowTracing": false,
+    "state": "active"
+  }
+}

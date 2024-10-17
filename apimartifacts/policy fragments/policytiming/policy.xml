@@ -1,0 +1,8 @@
+<fragment>
+	<set-variable name="endtime" value="@(DateTime.UtcNow)" />
+	<set-variable name="Policy-Execution-Time" value="@{
+            var exectime = context.Variables.GetValueOrDefault<DateTime>("endtime") - context.Variables.GetValueOrDefault<DateTime>("starttime");
+            var exectimeinms = (exectime.Seconds * 1000 +  exectime.Milliseconds).ToString();
+            return (string)(context.Variables.GetValueOrDefault<String>("Policy-Execution-Time") + ',' + context.Variables.GetValueOrDefault<String>("policyname") + ": " + exectimeinms.ToString() + "ms");
+            }" />
+</fragment>

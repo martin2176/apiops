@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "displayName": "test1222",
+    "scope": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/products/test1",
+    "allowTracing": false,
+    "ownerId": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/users/67046e6ffb4268160c4e57b9",
+    "state": "suspended"
+  }
+}

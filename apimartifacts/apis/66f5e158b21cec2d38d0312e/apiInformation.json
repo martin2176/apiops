@@ -1,0 +1,19 @@
+{
+  "properties": {
+    "path": "temsgraph-clone",
+    "apiRevision": "1",
+    "authenticationSettings": {},
+    "description": "",
+    "isCurrent": true,
+    "displayName": "te-msgraph (clone)",
+    "protocols": [
+      "https"
+    ],
+    "serviceUrl": "https://graph.microsoft.com/v1.0",
+    "subscriptionKeyParameterNames": {
+      "header": "Ocp-Apim-Subscription-Key",
+      "query": "subscription-key"
+    },
+    "subscriptionRequired": true
+  }
+}

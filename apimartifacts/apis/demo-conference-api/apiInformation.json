@@ -1,0 +1,26 @@
+{
+  "properties": {
+    "path": "conference",
+    "apiRevision": "2",
+    "apiRevisionDescription": "revision2",
+    "apiVersion": "v1",
+    "apiVersionSetId": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/apiVersionSets/665850ee6e6738b4d7408bab",
+    "authenticationSettings": {
+      "oAuth2": {
+        "authorizationServerId": "feidtifdevuser-consumerapp"
+      }
+    },
+    "description": "A sample API with information related to a technical conference.  The available resources  include *Speakers*, *Sessions* and *Topics*.  A single write operation is available to provide  feedback on a session.",
+    "isCurrent": true,
+    "displayName": "Demo Conference API",
+    "protocols": [
+      "https"
+    ],
+    "serviceUrl": "https://conferenceapi.azurewebsites.net",
+    "subscriptionKeyParameterNames": {
+      "header": "Ocp-Apim-Subscription-Key",
+      "query": "subscription-key"
+    },
+    "subscriptionRequired": true
+  }
+}

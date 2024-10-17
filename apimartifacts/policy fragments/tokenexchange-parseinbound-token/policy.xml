@@ -1,0 +1,46 @@
+<fragment>
+	<check-header name="Authorization" failed-check-httpcode="401" failed-check-error-message="Not authorized. Reason: Authorization Header missing" />
+	<set-variable name="authorizationscheme" value="@(context.Request.Headers.GetValueOrDefault("Authorization","None").Split(' ').First())" />
+	<set-variable name="foobar" value="@(context.Request.Headers.GetValueOrDefault("Authorization","None"))" />
+	<set-variable name="access_token" value="@(context.Request.Headers.GetValueOrDefault("Authorization","None").Split(' ').Last())" />
+	<!--    https://datatracker.ietf.org/doc/html/rfc6750#section-2.1
+                - Section 2.1 Clients SHOULD make authenticated requests with a bearer token using
+                - the "Authorization" request header field with the "Bearer" HTTP
+                - authorization scheme
+        -->
+	<choose>
+		<when condition="@(context.Variables.GetValueOrDefault<string>("authorizationscheme") == "")">
+			<return-response>
+				<set-status code="400" reason="Bad Request" />
+				<set-body>
+{
+    "statusCode": 400,
+    "message": "Authorization scheme is not specified or is null"
+}
+                </set-body>
+			</return-response>
+		</when>
+		<when condition="@(context.Variables.GetValueOrDefault<string>("authorizationscheme") != "Bearer")">
+			<return-response>
+				<set-status code="400" reason="Bad Request" />
+				<set-body>
+{
+    "statusCode": 400,
+    "message": "Authorization scheme specified is not of type Bearer"
+}
+                </set-body>
+			</return-response>
+		</when>
+		<when condition="@(context.Variables.GetValueOrDefault<string>("access_token") == "Bearer")">
+			<return-response>
+				<set-status code="400" reason="Bad Request" />
+				<set-body>
+{
+    "statusCode": 400,
+    "message": "Authorization scheme type Bearer is specified.However Bearer token is not specified or is null"
+}
+                </set-body>
+			</return-response>
+		</when>
+	</choose>
+</fragment>

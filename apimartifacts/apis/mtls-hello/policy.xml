@@ -1,0 +1,21 @@
+<policies>
+	<!-- Throttle, authorize, validate, cache, or transform the requests -->
+	<inbound>
+		<base />
+		<authentication-certificate certificate-id="client1certificateandkey" />
+		<set-variable name="baseUrl" value="https://mtls.tif.feiaz.ferguson.com" />
+		<set-variable name="servicePath" value="/hello" />
+	</inbound>
+	<!-- Control if and how the requests are forwarded to services  -->
+	<backend>
+		<base />
+	</backend>
+	<!-- Customize the responses -->
+	<outbound>
+		<base />
+	</outbound>
+	<!-- Handle exceptions and customize error responses  -->
+	<on-error>
+		<base />
+	</on-error>
+</policies>

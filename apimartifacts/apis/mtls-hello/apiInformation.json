@@ -1,0 +1,20 @@
+{
+  "properties": {
+    "path": "test",
+    "apiRevision": "1",
+    "apiVersionSetId": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/apiVersionSets/666ddd4ee5f131f5f3d0f1ae",
+    "authenticationSettings": {},
+    "description": "",
+    "isCurrent": true,
+    "displayName": "mtls-hello",
+    "protocols": [
+      "https"
+    ],
+    "serviceUrl": "https://mtls.tif.feiaz.ferguson.com/",
+    "subscriptionKeyParameterNames": {
+      "header": "Ocp-Apim-Subscription-Key",
+      "query": "subscription-key"
+    },
+    "subscriptionRequired": true
+  }
+}

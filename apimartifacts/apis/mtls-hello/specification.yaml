@@ -1,0 +1,29 @@
+openapi: 3.0.1
+info:
+  title: mtls-hello
+  description: ''
+  version: ''
+servers:
+  - url: https://martinapimext.azure-api.net/test
+paths:
+  /hello:
+    get:
+      summary: hello
+      description: hello
+      operationId: hello
+      responses:
+        '200':
+          description: 'null'
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]
