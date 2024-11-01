@@ -1,97 +1,13 @@
 openapi: 3.0.1
 info:
-  title: hellothereinprod
+  title: hellothereindev
+  description: hello on there
   license:
     name: MIT
   version: '1.0'
 servers:
   - url: https://martinapimext.azure-api.net/testprod
 paths:
-  /pets:
-    get:
-      tags:
-        - pets
-      summary: List all pets
-      description: List all pets
-      operationId: listPets
-      parameters:
-        - name: limit
-          in: query
-          description: Format - int32. How many items to return at one time (max 100)
-          schema:
-            maximum: 100.0
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: A paged array of pets
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pets'
-              example:
-                - id: 0
-                  name: string
-                  tag: string
-        '400':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
-        '500':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
-    post:
-      tags:
-        - pets
-      summary: Create a pet
-      description: Create a pet
-      operationId: createPets
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pet'
-            example:
-              id: 0
-              name: string
-              tag: string
-      responses:
-        '201':
-          description: Null response
-        '400':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
-        '500':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
   '/pets/{petId}':
     get:
       tags:
