@@ -3,12 +3,12 @@
     "path": "testprod",
     "apiRevision": "1",
     "authenticationSettings": {},
-    "description": "foo",
+    "description": "hello",
     "isCurrent": true,
     "license": {
       "name": "MIT"
     },
-    "displayName": "foo",
+    "displayName": "hello",
     "protocols": [
       "https"
     ],

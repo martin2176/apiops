@@ -1,0 +1,16 @@
+<fragment>
+	<return-response>
+		<set-status code="200" reason="OK" />
+		<set-header name="WWW-Authenticate" exists-action="override">
+			<value>Content-Type="application/json; charset=utf-8"</value>
+		</set-header>
+		<set-body template="liquid">
+{
+   "token_type": "Bearer",
+   "expires_in": {{context.Variables["accesstoken-exp"]}},
+   "access_token": "{{context.Variables["access_token_hash"]}}",
+   "access_token_unhashed": "{{context.Variables["access_token"]}}"
+}
+</set-body>
+	</return-response>
+</fragment>

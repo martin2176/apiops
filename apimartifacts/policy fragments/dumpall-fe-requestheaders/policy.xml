@@ -1,0 +1,13 @@
+<fragment>
+	<set-variable name="allrequestheaders" value="@{
+    string  allrequestheaders = "Frontend Request Headers:\n";
+    foreach(var requestheader in context.Request.Headers)
+                {
+                    allrequestheaders = allrequestheaders  + $"{requestheader.Key}: {string.Join(", ", requestheader.Value)}\n";
+                }
+    return allrequestheaders;
+    }" />
+	<trace source="dumpallrequestheaders" severity="information">
+		<message>@(context.Variables.GetValueOrDefault<String>("allrequestheaders"))</message>
+	</trace>
+</fragment>
