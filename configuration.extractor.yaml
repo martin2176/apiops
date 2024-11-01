@@ -1,5 +1,6 @@
 apiNames:
   - test
+  - echo-api
 backendNames:
   - none
 diagnosticNames:
