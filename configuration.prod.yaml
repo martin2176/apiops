@@ -17,4 +17,4 @@ apis:
     description: 'hello there'
     displayName: hellothereinprod
     format:  openapi-link
-    value: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/refs/heads/main/examples/v3.0/petstore.yaml
+    value: https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml
