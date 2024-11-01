@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: hello
-  description: hello
+  title: hellothereinprod
+  description: hello there
   license:
     name: MIT
   version: '1.0'
