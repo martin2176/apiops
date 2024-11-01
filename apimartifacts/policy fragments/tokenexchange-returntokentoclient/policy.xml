@@ -1,0 +1,18 @@
+<fragment>
+	<return-response>
+		<set-status code="200" reason="OK" />
+		<set-header name="WWW-Authenticate" exists-action="override">
+			<value>Content-Type="application/json; charset=utf-8"</value>
+		</set-header>
+		<set-body>@(new JObject
+    (
+    new JProperty("token_type", "Bearer"),
+    new JProperty("expires_in", context.Variables["accesstoken-exp"]),
+    new JProperty("access_token", context.Variables["access_token_hash"]), 
+    new JProperty("access_token_unhashed", context.Variables["access_token"])
+     )
+     .ToString()
+     )
+    </set-body>
+	</return-response>
+</fragment>

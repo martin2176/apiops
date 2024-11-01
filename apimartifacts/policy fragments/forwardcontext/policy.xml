@@ -1,0 +1,7 @@
+<fragment>
+	<set-header name="caller-data" exists-action="override">
+		<value>@(!String.IsNullOrEmpty(context?.User?.Email) ? context.User.Email : "default-email@example.com")</value>
+		<value>@(!String.IsNullOrEmpty(context?.User?.FirstName) ? context.User.FirstName : "DefaultFirstName")</value>
+		<value>@(!String.IsNullOrEmpty(context?.User?.LastName) ? context.User.LastName : "DefaultLastName")</value>
+	</set-header>
+</fragment>

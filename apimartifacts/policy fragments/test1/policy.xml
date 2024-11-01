@@ -1,0 +1,6 @@
+<fragment>
+	<set-variable name="allHeaders" value="@(string.Join(", ", context.Request.Headers.Select(h => h.Key + ": " + h.Value.FirstOrDefault())))" />
+	<trace source="dumpallrequestheaders" severity="information">
+		<message>@(context.Variables.GetValueOrDefault<String>("allHeaders"))</message>
+	</trace>
+</fragment>
