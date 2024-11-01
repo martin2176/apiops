@@ -3,6 +3,7 @@
     "path": "echo",
     "apiRevision": "1",
     "authenticationSettings": {},
+    "description": "Echo API",
     "isCurrent": true,
     "displayName": "Echo API",
     "protocols": [
