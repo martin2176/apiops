@@ -12,7 +12,7 @@ subscriptionNames:
   - none
 tagNames:
   - none
-PolicyFragmentNames:  [ ignore]
-apiVersionSetNames: [ ignore]
+versionSetNames:
+  - none
 groupNames:
   - none
