@@ -3,16 +3,15 @@
     "path": "testprod",
     "apiRevision": "1",
     "authenticationSettings": {},
-    "description": "hello",
+    "description": "hello there",
     "isCurrent": true,
     "license": {
       "name": "MIT"
     },
-    "displayName": "hello",
+    "displayName": "hellothereinprod",
     "protocols": [
       "https"
     ],
-    "serviceUrl": "https://martinapimext.azure-api.net/test1",
     "subscriptionKeyParameterNames": {
       "header": "Ocp-Apim-Subscription-Key",
       "query": "subscription-key"
