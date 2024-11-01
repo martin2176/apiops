@@ -1,56 +1,13 @@
 openapi: 3.0.1
 info:
-  title: hellothereindev
-  description: hello on there
+  title: foo
+  description: foo
   license:
     name: MIT
   version: '1.0'
 servers:
   - url: https://martinapimext.azure-api.net/testprod
-paths:
-  '/pets/{petId}':
-    get:
-      tags:
-        - pets
-      summary: Info for a specific pet
-      description: Info for a specific pet
-      operationId: showPetById
-      parameters:
-        - name: petId
-          in: path
-          description: The id of the pet to retrieve
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pet'
-              example:
-                id: 0
-                name: string
-                tag: string
-        '400':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
-        '500':
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: 0
-                message: string
+paths: { }
 components:
   schemas:
     Pet:
