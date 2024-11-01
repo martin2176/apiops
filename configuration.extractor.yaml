@@ -17,5 +17,6 @@ versionSetNames:
   - none
 groupNames:
   - none
-PolicyFragmentNames:  [ ignore]
+PolicyFragmentNames:
+  - none
   
