@@ -16,5 +16,5 @@ apis:
     authenticationSettings: {}
     description: 'hello there'
     displayName: hellothereinprod
-    format:  openapi-link
-    value: https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml
+    format:  swagger-link-json
+    value: https://petstore.swagger.io/v2/swagger.json
