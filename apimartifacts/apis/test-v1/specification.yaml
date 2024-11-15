@@ -8,9 +8,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: ''
+  version: v1
 servers:
-  - url: https://martinapimext.azure-api.net/testdev
+  - url: https://martinapimext.azure-api.net/testdev/v1
 paths:
   '/pet/{petId}/uploadImage':
     post:
