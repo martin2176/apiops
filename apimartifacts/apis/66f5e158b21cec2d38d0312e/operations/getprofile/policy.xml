@@ -1,0 +1,53 @@
+<!--
+    - Policies are applied in the order they appear.
+    - Position <base/> inside a section to inherit policies from the outer scope.
+    - Comments within policies are not preserved.
+-->
+<!-- Add policies as children to the <inbound>, <outbound>, <backend>, and <on-error> elements -->
+<policies>
+	<!-- Throttle, authorize, validate, cache, or transform the requests -->
+	<inbound>
+		<base />
+		<include-fragment fragment-id="tokenexchange-parseinbound-token" />
+		<cache-lookup-value key="@((string)context.Variables["access_token"])" variable-name="idpaccesstoken" caching-type="internal" />
+		<cache-lookup-value key="@((string)context.Variables["access_token"] + "-subid")" variable-name="subscriptionid" caching-type="internal" />
+		<set-variable name="subscriptionidderived" value="@(context.Subscription.Id)" />
+		<choose>
+			<when condition="@(context.Variables.ContainsKey("idpaccesstoken") && context.Variables.ContainsKey("subscriptionid") && (context.Variables.GetValueOrDefault<string>("subscriptionid") == context.Subscription.Id))">
+				<set-variable name="newaccesstoken" value="TOKENFOUNDANDSUBMATCHED" />
+				<set-header name="Authorization" exists-action="override">
+					<value>@("Bearer " + (context.Variables.GetValueOrDefault<string>("idpaccesstoken")))</value>
+				</set-header>
+			</when>
+			<when condition="@((context.Variables.ContainsKey("idpaccesstoken") && context.Variables.ContainsKey("subscriptionid")) && !(context.Variables.GetValueOrDefault<string>("subscriptionid") == context.Subscription.Id))">
+				<set-variable name="newaccesstoken" value="TOKENFOUNDANDSUBNOTMATCHED" />
+				<return-response>
+					<set-status code="401" reason="Unauthorized" />
+					<set-body>Access denied due to subscription key not associated with the token.A different Sub Key was used for token request</set-body>
+				</return-response>
+			</when>
+			<when condition="@(!(context.Variables.ContainsKey("idpaccesstoken")) || !(context.Variables.ContainsKey("subscriptionid")))">
+				<set-variable name="newaccesstoken" value="TOKENNOTFOUND" />
+				<return-response>
+					<set-status code="401" reason="Unauthorized" />
+					<set-body>Access denied due to invalid token or expired token</set-body>
+				</return-response>
+			</when>
+			<otherwise>
+				<set-variable name="newaccesstoken" value="SOMEOTHERREASON" />
+			</otherwise>
+		</choose>
+	</inbound>
+	<!-- Control if and how the requests are forwarded to services  -->
+	<backend>
+		<base />
+	</backend>
+	<!-- Customize the responses -->
+	<outbound>
+		<base />
+	</outbound>
+	<!-- Handle exceptions and customize error responses  -->
+	<on-error>
+		<base />
+	</on-error>
+</policies>

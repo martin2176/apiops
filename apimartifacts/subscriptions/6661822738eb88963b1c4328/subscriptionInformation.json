@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "displayName": "Product testproduct subscription (1)",
+    "scope": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/products/testproduct",
+    "allowTracing": false,
+    "ownerId": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/users/1",
+    "state": "active"
+  }
+}

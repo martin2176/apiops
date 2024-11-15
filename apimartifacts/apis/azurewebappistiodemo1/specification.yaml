@@ -1,0 +1,70 @@
+openapi: 3.0.1
+info:
+  title: azurewebappistiodemo1
+  description: ''
+  version: '1.0'
+servers:
+  - url: https://martinapimext.azure-api.net/webappdemo
+paths:
+  /*:
+    get:
+      summary: azurewebappistiodemo1_GET
+      operationId: 6697db9aec530eaf521384f6
+      responses:
+        '200':
+          description: 
+    delete:
+      summary: azurewebappistiodemo1_DELETE
+      operationId: 6697db9a4af840944ad5ba1e
+      responses:
+        '200':
+          description: 
+    trace:
+      summary: azurewebappistiodemo1_TRACE
+      operationId: 6697db9a1439097171036db6
+      responses:
+        '200':
+          description: 
+    post:
+      summary: azurewebappistiodemo1_POST
+      operationId: 6697db9a3301e8e1476d63bb
+      responses:
+        '200':
+          description: 
+    put:
+      summary: azurewebappistiodemo1_PUT
+      operationId: 6697db9a517b9fd91596067a
+      responses:
+        '200':
+          description: 
+    options:
+      summary: azurewebappistiodemo1_OPTIONS
+      operationId: 6697db9aef5fc3af6e7af68e
+      responses:
+        '200':
+          description: 
+    patch:
+      summary: azurewebappistiodemo1_PATCH
+      operationId: 6697db9a61c1772148f116e0
+      responses:
+        '200':
+          description: 
+    head:
+      summary: azurewebappistiodemo1_HEAD
+      operationId: 6697db9a87e29e137d7d7a2a
+      responses:
+        '200':
+          description: 
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

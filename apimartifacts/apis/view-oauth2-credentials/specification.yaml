@@ -1,0 +1,28 @@
+openapi: 3.0.1
+info:
+  title: View OAUTH2 Credentials
+  description: ''
+  version: '1.0'
+servers:
+  - url: https://martinapimext.azure-api.net/viewoauth2creds
+paths:
+  /view-clientid-and-secret:
+    get:
+      summary: view-clientid-and-secret
+      operationId: view-clientid-and-secret
+      responses:
+        '200':
+          description: 
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

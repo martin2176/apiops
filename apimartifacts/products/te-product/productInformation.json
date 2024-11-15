@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "displayName": "te product",
+    "description": "te",
+    "approvalRequired": false,
+    "state": "published",
+    "subscriptionRequired": true
+  }
+}
