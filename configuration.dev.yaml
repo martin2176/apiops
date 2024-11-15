@@ -8,10 +8,6 @@ namedValues:
     properties:
       displayName: environment
       value: "development"
-  - name: testSecret
-    properties:
-      displayName: testSecret
-      value: "{#testSecretValue#}"         
 apis:
  - name: test
    properties:
