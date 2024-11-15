@@ -16,7 +16,7 @@ namedValues:
 apis:
  - name: test
    properties:
-    path: testprod
+    path: testdev
     apiRevision: '1'
     authenticationSettings: {}
     description: 'hello there'
