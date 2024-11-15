@@ -4,7 +4,6 @@ namedValues:
     properties:
       displayName: testSecret
       value: "{#testSecretValue#}"
-namedValues:
   - name: environment
     properties:
       displayName: environment
