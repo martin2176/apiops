@@ -1,5 +1,6 @@
 apiNames:
   - test
+  - test-v1
 backendNames:
   - none
 diagnosticNames:
@@ -13,7 +14,7 @@ subscriptionNames:
 tagNames:
   - none
 versionSetNames:
-  - none
+  - test
 groupNames:
   - none
 PolicyFragmentNames:
