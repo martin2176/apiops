@@ -1,0 +1,48 @@
+{
+  "properties": {
+    "loggerId": "/subscriptions/db73da55-ad6a-4d59-aeea-bba62c278f2a/resourceGroups/apim/providers/Microsoft.ApiManagement/service/martinapimext/loggers/azuremonitor",
+    "alwaysLog": "allErrors",
+    "backend": {
+      "request": {
+        "body": {
+          "bytes": 0
+        },
+        "headers": [
+          "foo3"
+        ]
+      },
+      "response": {
+        "body": {
+          "bytes": 0
+        },
+        "headers": [
+          "foo4"
+        ]
+      }
+    },
+    "frontend": {
+      "request": {
+        "body": {
+          "bytes": 0
+        },
+        "headers": [
+          "foo1"
+        ]
+      },
+      "response": {
+        "body": {
+          "bytes": 0
+        },
+        "headers": [
+          "foo2"
+        ]
+      }
+    },
+    "logClientIp": true,
+    "sampling": {
+      "percentage": 100,
+      "samplingType": "fixed"
+    },
+    "verbosity": "information"
+  }
+}

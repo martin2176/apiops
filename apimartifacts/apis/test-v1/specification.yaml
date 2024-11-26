@@ -17,6 +17,7 @@ paths:
       tags:
         - pet
       summary: uploads an image
+      description: uploads an image
       operationId: uploadFile
       parameters:
         - name: petId
@@ -37,9 +38,7 @@ paths:
             schema:
               type: string
               format: binary
-            examples:
-              default:
-                value: 
+            example: ''
       responses:
         '200':
           description: successful operation
@@ -339,6 +338,7 @@ paths:
       tags:
         - pet
       summary: Updates a pet in the store with form data
+      description: Updates a pet in the store with form data
       operationId: updatePetWithForm
       parameters:
         - name: petId
@@ -365,6 +365,7 @@ paths:
       tags:
         - pet
       summary: Deletes a pet
+      description: Deletes a pet
       operationId: deletePet
       parameters:
         - name: petId
@@ -569,6 +570,7 @@ paths:
       tags:
         - user
       summary: Get user by user name
+      description: Get user by user name
       operationId: getUserByName
       parameters:
         - name: username
@@ -684,6 +686,7 @@ paths:
       tags:
         - user
       summary: Logs user into the system
+      description: Logs user into the system
       operationId: loginUser
       parameters:
         - name: username
@@ -726,6 +729,7 @@ paths:
       tags:
         - user
       summary: Logs out current logged in user session
+      description: Logs out current logged in user session
       operationId: logoutUser
       responses:
         '200':
@@ -1028,11 +1032,11 @@ tags:
     description: Everything about your Pets
     externalDocs:
       description: Find out more
-      url: http://swagger.io
+      url: http://swagger.io/
   - name: store
     description: Access to Petstore orders
   - name: user
     description: Operations about user
     externalDocs:
       description: Find out more about our store
-      url: http://swagger.io
+      url: http://swagger.io/

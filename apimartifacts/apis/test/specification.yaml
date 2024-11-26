@@ -839,6 +839,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
               example: <user> <id>10</id> <username>theUser</username> <firstName>John</firstName> <lastName>James</lastName> <email>john@email.com</email> <password>12345</password> <phone>12345</phone> <userStatus>1</userStatus> </user>
+  /healthcheck:
+    get:
+      summary: healthcheck
+      operationId: healthcheck
+      responses:
+        '200':
+          description: 
 components:
   schemas:
     Order:
