@@ -24,9 +24,21 @@
 				<header>*</header>
 			</expose-headers>
 		</cors>
+		<choose>
+			<when condition="@(context.Request.Headers.GetValueOrDefault("End-Point","").Contains("healthcheck"))">
+				<return-response>
+					<set-status code="200" reason="OK" />
+					<set-header name="Content-Type" exists-action="override">
+						<value>application/json</value>
+					</set-header>
+					<set-body>"status": "Global Scoped response"</set-body>
+				</return-response>
+			</when>
+		</choose>
 	</inbound>
 	<backend>
 		<forward-request />
 	</backend>
 	<outbound />
+	<on-error />
 </policies>
