@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       CONFIGURATION_YAML_PATH:
-        description: 'Choose Wether to extract all Apis or extract apis listed an extraction configuration file'     
+        description: 'Extract All or Selected APIM Artifacts?'     
         required: true
         type: choice
         options:
@@ -20,6 +20,15 @@ on:
         - OpenAPIV2Yaml
         - OpenAPIV2Json
         default: OpenAPIV3Yaml
+      Developer Name:
+        description: 'Name of API Developer to include in title of PR'     
+        required: true
+        type: string
+      Reference Number:
+        description: 'Reference Number to include in title of PR'     
+        required: true
+        type: string
+        default: '0000000'
 env:
   apiops_release_version: v6.0.1.3
 
