@@ -44,7 +44,7 @@ jobs:
           CONFIGURATION_YAML_PATH: ${{ GITHUB.WORKSPACE }}/${{ github.event.inputs.CONFIGURATION_YAML_PATH }}
           
         run: |
-          $var1=${{ github.event.inputs.CONFIGURATION_YAML_PATH }}
+          $var1="${{ github.event.inputs.CONFIGURATION_YAML_PATH }}"
           $var2="Extract All APIs"
           $var1
           $var2
