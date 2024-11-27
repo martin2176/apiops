@@ -41,9 +41,13 @@ jobs:
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
           API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts  # change this to the artifacts folder
           API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }}
-          CONFIGURATION_YAML_PATH: ${{ 1 == 1 && '' || '' }}
+          CONFIGURATION_YAML_PATH: ${{ GITHUB.WORKSPACE }}/${{ github.event.inputs.CONFIGURATION_YAML_PATH }}
           
         run: |
+          $env:CONFIGURATION_YAML_PATH
+          Remove-Item Env:\CONFIGURATION_YAML_PATH
+          $env:CONFIGURATION_YAML_PATH
+          
           Set-StrictMode -Version Latest
           $ErrorActionPreference = "Stop"
           $VerbosePreference = "Continue"
