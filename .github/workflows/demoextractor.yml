@@ -10,7 +10,7 @@ on:
         options:
         - Extract All APIM Artifacts
         - Extract Selected APIM Artifacts
-        default: Extract Selected APIM Artifacts
+        default: 'Extract Selected APIM Artifacts'
       API_SPECIFICATION_FORMAT:
         description: 'API Specification Format'     
         required: true
