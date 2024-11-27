@@ -1,20 +1,13 @@
 name: turnstyle
 on:
   workflow_dispatch:
-
 jobs:
-  test:
+  main:
     runs-on: ubuntu-latest
-    name: test
     steps:
-      - name: run
-        id: turnstyle
-        uses: beckermr/turnstyle-python@v1
-        with:
-          poll-interval-seconds: 30    # checks the status of any previous runs at this interval
-          #continue-after-seconds: 10  # continue after 10 seconds
-          abort-after-seconds: 120   # use this to abort instead of continue 
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Turnstyle
+        uses: softprops/turnstyle@v2
       - name: Deploy
-        run: sleep 60
+        run: sleep 30
