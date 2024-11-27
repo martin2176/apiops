@@ -19,8 +19,7 @@ on:
         - OpenAPIV3Json
         - OpenAPIV2Yaml
         - OpenAPIV2Json
-        default:
-        - OpenAPIV3Yaml
+        default: OpenAPIV3Yaml
 env:
   apiops_release_version: v6.0.1.3
 
