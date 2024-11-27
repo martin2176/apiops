@@ -44,10 +44,19 @@ jobs:
           CONFIGURATION_YAML_PATH: ${{ GITHUB.WORKSPACE }}/${{ github.event.inputs.CONFIGURATION_YAML_PATH }}
           
         run: |
+          $var1=${{ github.event.inputs.CONFIGURATION_YAML_PATH }}
+          $var2="Extract All APIs"
+          $var1
+          $var2
+          if ($var1 -eq $var2) {
+          Write-Output "values are same"
           $env:CONFIGURATION_YAML_PATH
           Remove-Item Env:\CONFIGURATION_YAML_PATH
           $env:CONFIGURATION_YAML_PATH
-          
+          } else {
+          Write-Output "values are different"
+          $env:CONFIGURATION_YAML_PATH
+          }
           Set-StrictMode -Version Latest
           $ErrorActionPreference = "Stop"
           $VerbosePreference = "Continue"
