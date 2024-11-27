@@ -46,19 +46,15 @@ jobs:
           $var1="${{ github.event.inputs.CONFIGURATION_YAML_PATH }}"
           $var2="Extract All APIM Artifacts"
           $var3="Extract Selected APIM Artifacts"
-          $var1
-          $var2
-          $var3
           if ($var1 -eq $var3) 
           {
-          Write-Output "Extract Selected APIM Artifacts"
+          Write-Output "Extracting Selected APIM Artifacts"
           $env:CONFIGURATION_YAML_PATH="configuration.extractor.yaml"
           $env:CONFIGURATION_YAML_PATH 
           }
           else
           {
-          Write-Output "Extract All APIM Artifacts"
-          Remove-Item Env:\CONFIGURATION_YAML_PATH
+          Write-Output "Extracting All APIM Artifacts"
           }
           Set-StrictMode -Version Latest
           $ErrorActionPreference = "Stop"
