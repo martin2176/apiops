@@ -1,0 +1,23 @@
+name: test
+on:
+  push:
+    branches:
+      - main
+  pull_request: null
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: test
+    steps:
+      - name: run
+        id: turnstyle
+        uses: beckermr/turnstyle-python@v1
+        with:
+          poll-interval-seconds: 30    # checks the status of any previous runs at this interval
+          #continue-after-seconds: 10  # continue after 10 seconds
+          abort-after-seconds: 120   # use this to abort instead of continue 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy
+        run: sleep 60
