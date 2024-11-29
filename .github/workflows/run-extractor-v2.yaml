@@ -6,7 +6,7 @@ on:
       REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH:
         description: 'Choose the Ref to checkout for the Extractor Config File (Dev branch or specific commit from Dev branch)'     
         required: true
-        type: choice
+        type: string
         default: dev
 
       CONFIGURATION_YAML_PATH:
