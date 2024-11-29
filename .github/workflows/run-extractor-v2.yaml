@@ -25,6 +25,15 @@ on:
         - OpenAPIV3Json
         - OpenAPIV2Yaml
         - OpenAPIV2Json
+      Developer Name:
+        description: 'Name of API Developer to include in title of PR'     
+        required: true
+        type: string
+      Reference Number:
+        description: 'Reference Number to include in title of PR'     
+        required: true
+        type: string
+        default: '0000000'        
 
 env:
   apiops_release_version: v6.0.1.3
@@ -35,6 +44,8 @@ jobs:
     environment: dev # change this to match the dev environment created in settings 
     steps:
       - uses: actions/checkout@v4
+         with:
+          ref: '${{ github.event.inputs.REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH }}'
           
       - name: Run extractor
         
