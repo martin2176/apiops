@@ -1,4 +1,4 @@
-name: turnstyle
+name: concurrency
 on:
   workflow_dispatch:
 concurrency:
