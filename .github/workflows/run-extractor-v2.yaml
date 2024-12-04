@@ -10,7 +10,7 @@ on:
         default: dev
 
       CONFIGURATION_YAML_PATH:
-        description: 'Choose Wether to extract all Apis or extract apis listed in Extractor Config File'     
+        description: 'Choose Whether to extract all APIM artifacts OR extract only APIM artifacts listed in Extractor Config File'     
         required: true
         type: choice
         options:
@@ -25,6 +25,7 @@ on:
         - OpenAPIV3Json
         - OpenAPIV2Yaml
         - OpenAPIV2Json
+        default: OpenAPIV3Yaml
       Developer Name:
         description: 'Name of API Developer to include in title of PR'     
         required: true
@@ -33,8 +34,11 @@ on:
         description: 'Reference Number to include in title of PR'     
         required: true
         type: string
-        default: '0000000'        
-    
+        default: '0000000'
+
+concurrency:
+ group: extract-from-dev-apim-instance
+ cancel-in-progress: false    
 
 env:
   apiops_release_version: v6.0.1.3
