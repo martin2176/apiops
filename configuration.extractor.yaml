@@ -1,6 +1,7 @@
 apiNames:
   - test
   - test-v1
+  - test-v2
 backendNames:
   - none
 diagnosticNames:
