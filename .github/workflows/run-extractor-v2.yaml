@@ -145,9 +145,9 @@ jobs:
       - name: Checkout-Working-Branch
         uses: actions/checkout@v4
         with:
-         ref: 'working'
-         fetch-depth: 1
-         fetch-tags: 'false'
+         ref: 'artifacts'
+         #fetch-depth: 1
+         #fetch-tags: 'false'
         
       - name: Download-Artifacts-From-Job
         uses: actions/download-artifact@v4
@@ -164,7 +164,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: working
-          base: artifacts
+          #base: artifacts
           commit-message: "Commiting Artifacts from GHA Workflow Run ID:${{ github.run_id	 }}"
           title: "PR Opened by ${{ github.triggering_actor }} for ${{ github.event.inputs.REFERENCE_NUMBER }}"
           body: >
