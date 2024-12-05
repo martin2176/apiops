@@ -65,10 +65,11 @@ jobs:
           if ($var1 -eq $var3) 
           {
           Write-Output "User have chosen to extract Selected APIM Artifacts"
-          $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration.extractor.yaml"
-          $env:CONFIGURATION_YAML_PATH 
           echo "Copying extractor configuration file to runner.temp"
           copy configuration.extractor.yaml $env:RUNNER_TEMP
+          $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration.extractor.yaml"
+          $env:CONFIGURATION_YAML_PATH
+          cat $env:CONFIGURATION_YAML_PATH
           }
           else
           {
