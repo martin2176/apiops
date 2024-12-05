@@ -42,14 +42,13 @@ jobs:
   Extract-Artifacts:
     runs-on: ubuntu-latest
     environment: dev
-    env:
-     API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts
+
     steps:
       - name: Checkout-Configuration-File
         uses: actions/checkout@v4
         with:
          ref: '${{ github.event.inputs.REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH }}'
-        
+
       - name: Run-Extractor
         env:
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -59,7 +58,7 @@ jobs:
           AZURE_RESOURCE_GROUP_NAME: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
           #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts  # change this to the artifacts folder
-          #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts
+          API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts
           API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }}
           Logging__LogLevel__Default: Debug
           #CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration.extractor.yaml
@@ -127,9 +126,9 @@ jobs:
       
       - name: Upload-Artifact
         uses: actions/upload-artifact@v4
-      #  env:
+        env:
       #    API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts
-      #    #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts  # change this to the artifacts folder  
+         API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts 
         with:
           name: artifact-extract-from-dev-apim-instance
           #path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}/${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
