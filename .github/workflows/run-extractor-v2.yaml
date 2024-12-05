@@ -41,7 +41,9 @@ env:
 jobs:
   Extract-Artifacts:
     runs-on: ubuntu-latest
-    environment: dev 
+    environment: dev
+    env:
+     API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts
     steps:
       - name: Checkout-Configuration-File
         uses: actions/checkout@v4
@@ -57,29 +59,27 @@ jobs:
           AZURE_RESOURCE_GROUP_NAME: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
           #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts  # change this to the artifacts folder
-          API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts
+          #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts
           API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }}
           Logging__LogLevel__Default: Debug
-          CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration.extractor.yaml
+          #CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration.extractor.yaml
         run: |
-          #$var1="${{ github.event.inputs.CONFIGURATION_YAML_PATH }}"
-          #$var2="Extract All APIM Artifacts"
-          #$var3="Extract Selected APIM Artifacts"
-          #if ($var1 -eq $var3) 
-          #{
-          #Write-Output "User have chosen to extract Selected APIM Artifacts"
-          #echo "Copying extractor configuration file to runner.temp"
-          #copy configuration.extractor.yaml $env:RUNNER_TEMP
-          #$env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration.extractor.yaml"
+          $var1="${{ github.event.inputs.CONFIGURATION_YAML_PATH }}"
+          $var2="Extract All APIM Artifacts"
+          $var3="Extract Selected APIM Artifacts"
+          if ($var1 -eq $var3) 
+          {
+          Write-Output "User have chosen to extract Selected APIM Artifacts"
+          echo "Copying extractor configuration file to runner.temp"
+          copy configuration.extractor.yaml $env:RUNNER_TEMP
+          $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration.extractor.yaml"
           $env:CONFIGURATION_YAML_PATH
           $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH
-          #$env:API_SPECIFICATION_FORMAT
-          #cat $env:CONFIGURATION_YAML_PATH
-          #}
-          #else
-          #{
-          #Write-Output "User have chosen to extract All APIM Artifacts"
-          #}
+          }
+          else
+          {
+          Write-Output "User have chosen to extract All APIM Artifacts"
+          }
           Set-StrictMode -Version Latest
           $ErrorActionPreference = "Stop"
           $VerbosePreference = "Continue"
@@ -125,14 +125,14 @@ jobs:
           ls -R $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH
         shell: pwsh
       
-      #- name: Upload-Artifact
-      #  uses: actions/upload-artifact@v4
+      - name: Upload-Artifact
+        uses: actions/upload-artifact@v4
       #  env:
       #    API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts
       #    #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts  # change this to the artifacts folder  
-      #  with:
-      #    name: artifact-extract-from-dev-apim-instance
-      #    #path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}/${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
-      #    path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
-      #    overwrite: 'true'
+        with:
+          name: artifact-extract-from-dev-apim-instance
+          #path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}/${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
+          path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
+          overwrite: 'true'
 
