@@ -1,4 +1,4 @@
-name: Extract-From-Dev-APIM-Instance
+z                name: Extract-From-Dev-APIM-Instance
 
 on:
   workflow_dispatch:
@@ -144,10 +144,10 @@ jobs:
     steps:
       - name: Checkout-Working-Branch
         uses: actions/checkout@v4
-        #with:
-         #ref: 'artifacts'
-         #fetch-depth: 1
-         #fetch-tags: 'false'
+        with:
+         ref: 'artifacts'
+         fetch-depth: 1
+         fetch-tags: 'false'
         
       - name: Download-Artifacts-From-Job
         uses: actions/download-artifact@v4
@@ -163,8 +163,8 @@ jobs:
           #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts  # change this to the artifacts folder          
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          #branch: working
-          #base: artifacts
+          branch: working
+          base: artifacts
           commit-message: "Commiting Artifacts from GHA Workflow Run ID:${{ github.run_id	 }}"
           title: "PR Opened by ${{ github.triggering_actor }} for ${{ github.event.inputs.REFERENCE_NUMBER }}"
           body: >
