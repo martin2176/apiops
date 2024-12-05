@@ -2,6 +2,8 @@ apiNames:
   - test-v2;rev=2
   - testapispec
   - test-v2
+  - test
+  - test-v1
 backendNames:
   - none
 diagnosticNames:
