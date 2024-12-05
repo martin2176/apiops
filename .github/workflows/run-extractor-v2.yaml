@@ -58,7 +58,7 @@ jobs:
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
           API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts  # change this to the artifacts folder
           API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }}
-          Logging__LogLevel__Default: Trace
+          #Logging__LogLevel__Default: Trace
           #CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration.extractor.yaml
         run: |
           $var1="${{ github.event.inputs.CONFIGURATION_YAML_PATH }}"
@@ -72,7 +72,7 @@ jobs:
           $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration.extractor.yaml"
           $env:CONFIGURATION_YAML_PATH
           $env:API_SPECIFICATION_FORMAT
-          cat $env:CONFIGURATION_YAML_PATH
+          #cat $env:CONFIGURATION_YAML_PATH
           }
           else
           {
@@ -120,6 +120,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Running extractor failed."}
 
           Write-Information "Execution complete."
+          ls -R $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH
         shell: pwsh
       
       - name: Upload-Artifact
