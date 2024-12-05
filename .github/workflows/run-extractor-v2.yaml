@@ -58,7 +58,7 @@ jobs:
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
           API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts  # change this to the artifacts folder
           API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }}
-          #Logging__LogLevel__Default: Trace
+          Logging__LogLevel__Default: Debug
           CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration.extractor.yaml
         run: |
           #$var1="${{ github.event.inputs.CONFIGURATION_YAML_PATH }}"
@@ -123,14 +123,14 @@ jobs:
           ls -R $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH
         shell: pwsh
       
-      - name: Upload-Artifact
-        uses: actions/upload-artifact@v4
-        env:
-          API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts
-          #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts  # change this to the artifacts folder  
-        with:
-          name: artifact-extract-from-dev-apim-instance
-          #path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}/${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
-          path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
-          overwrite: 'true'
+      #- name: Upload-Artifact
+      #  uses: actions/upload-artifact@v4
+      #  env:
+      #    API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts
+      #    #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts  # change this to the artifacts folder  
+      #  with:
+      #    name: artifact-extract-from-dev-apim-instance
+      #    #path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}/${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
+      #    path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
+      #    overwrite: 'true'
 
