@@ -1,6 +1,4 @@
 apiNames:
-  - test-v2
-  - testapispec
   - test
 backendNames:
   - none
