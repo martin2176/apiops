@@ -1,4 +1,4 @@
-name: Extract-From-Dev-APIM-Instance-Test-RunID-${{ github.run_id	}}
+name: Extract-From-Dev-APIM-Instance-Test
 on:
   workflow_dispatch:
     inputs:
