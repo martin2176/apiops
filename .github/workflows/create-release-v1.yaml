@@ -29,4 +29,5 @@ jobs:
           name: Release ${{ inputs.TAG }}
           tag: ${{ inputs.TAG }}
           draft: false
-          prerelease: false    
+          prerelease: false
+          token: ${{ env.GITHUB_TOKEN }}
