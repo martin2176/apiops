@@ -4,9 +4,6 @@ on:
       COMMITID:
         required: true
         type: string
-      RELEASE:
-        required: true
-        type: string
       TAG:
         required: true
         type: string         
@@ -25,8 +22,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          commitish : ${{ inputs.COMMITID }}
-          release_name: Release ${{ inputs.RELEASE }}
+          #commitish : ${{ inputs.COMMITID }}
+          release_name: Release ${{ inputs.TAG }}
           tag_name: ${{ inputs.TAG }}
           body: |
             Changes in this Release
