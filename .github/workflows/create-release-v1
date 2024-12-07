@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+    inputs:
+      COMMITID:
+        required: true
+        type: string
+      TAG:
+        required: true
+        type: string         
+name: Create Release V1
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    permissions:
+     contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          commit : ${{ inputs.COMMITID }}
+          name: Release ${{ inputs.TAG }}
+          tag: ${{ inputs.TAG }}
+          draft: false
+          prerelease: false    
