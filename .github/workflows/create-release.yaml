@@ -6,7 +6,10 @@ on:
         type: string
       RELEASE:
         required: true
-        type: string 
+        type: string
+      TAG:
+        required: true
+        type: string         
 name: Create Release
 
 jobs:
@@ -24,6 +27,7 @@ jobs:
         with:
           commitish : ${{ inputs.COMMITID }}
           release_name: Release ${{ inputs.RELEASE }}
+          tag_name: ${{ inputs.TAG }}
           body: |
             Changes in this Release
             - First Change
