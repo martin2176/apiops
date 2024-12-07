@@ -27,7 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          commit : 4a1810c88c39d8fbf61d436bb16284a59926674f
+          commit : c0cf27fda0dc9376c00fccfbf95b26aea9730f3e
           name: Release ${{ inputs.TAG }}
           tag: ${{ inputs.TAG }}
           draft: false
