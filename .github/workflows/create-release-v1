@@ -11,7 +11,7 @@ name: Create Release V1
 
 jobs:
   build:
-    name: Create Release
+    name: Create Release v1
     runs-on: ubuntu-latest
     permissions:
      contents: write
