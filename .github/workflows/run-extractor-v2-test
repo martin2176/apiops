@@ -1,4 +1,4 @@
-name: Extract-From-Dev-APIM-Instance
+name: Extract-From-Dev-APIM-Instance-test
 on:
   workflow_dispatch:
     inputs:
