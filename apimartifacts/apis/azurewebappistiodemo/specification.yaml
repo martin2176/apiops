@@ -1,70 +1,71 @@
-openapi: 3.0.1
+swagger: '2.0'
 info:
   title: azurewebappistiodemo
-  description: ''
   version: '1.0'
-servers:
-  - url: https://martinapimext.azure-api.net/azurewebappistiodemo
+host: martinapimext.azure-api.net
+basePath: /azurewebappistiodemo
+schemes:
+- https
+securityDefinitions:
+  apiKeyHeader:
+    type: apiKey
+    name: Ocp-Apim-Subscription-Key
+    in: header
+  apiKeyQuery:
+    type: apiKey
+    name: subscription-key
+    in: query
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
 paths:
   /*:
     trace:
-      summary: azurewebappistiodemo_TRACE
       operationId: 666b2231facff96e1d8b07a7
+      summary: azurewebappistiodemo_TRACE
       responses:
-        '200':
-          description: 
+        200:
+          description: null
     head:
-      summary: azurewebappistiodemo_HEAD
       operationId: 666b2231c67633061b98abee
+      summary: azurewebappistiodemo_HEAD
       responses:
-        '200':
-          description: 
+        200:
+          description: null
     post:
-      summary: azurewebappistiodemo_POST
       operationId: 666b22318ffbdc241b94a135
+      summary: azurewebappistiodemo_POST
       responses:
-        '200':
-          description: 
+        200:
+          description: null
     get:
-      summary: azurewebappistiodemo_GET
       operationId: 666b22312317fe1b3397683c
+      summary: azurewebappistiodemo_GET
       responses:
-        '200':
-          description: 
+        200:
+          description: null
     delete:
-      summary: azurewebappistiodemo_DELETE
       operationId: 666b223185cfec6b10a147ee
+      summary: azurewebappistiodemo_DELETE
       responses:
-        '200':
-          description: 
+        200:
+          description: null
     options:
-      summary: azurewebappistiodemo_OPTIONS
       operationId: 666b22313cafbe25d70e3169
+      summary: azurewebappistiodemo_OPTIONS
       responses:
-        '200':
-          description: 
+        200:
+          description: null
     patch:
-      summary: azurewebappistiodemo_PATCH
       operationId: 666b223130ef23575dbc59da
+      summary: azurewebappistiodemo_PATCH
       responses:
-        '200':
-          description: 
+        200:
+          description: null
     put:
-      summary: azurewebappistiodemo_PUT
       operationId: 666b2231f702425a5f315050
+      summary: azurewebappistiodemo_PUT
       responses:
-        '200':
-          description: 
-components:
-  securitySchemes:
-    apiKeyHeader:
-      type: apiKey
-      name: Ocp-Apim-Subscription-Key
-      in: header
-    apiKeyQuery:
-      type: apiKey
-      name: subscription-key
-      in: query
-security:
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+        200:
+          description: null
+tags: []
