@@ -20,16 +20,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-         ref: 'main'
+         ref: 'artifacts'
       - name: Create Release
         id: create_release
         uses: ncipollo/release-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          commit : c0cf27fda0dc9376c00fccfbf95b26aea9730f3e
+          commit : ${{ inputs.COMMITID }}
           name: Release ${{ inputs.TAG }}
           tag: ${{ inputs.TAG }}
           draft: false
           prerelease: false
           token: ${{ env.GITHUB_TOKEN }}
+          replacesArtifacts: false
