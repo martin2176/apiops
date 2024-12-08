@@ -22,7 +22,7 @@ jobs:
          ref: 'artifacts'
          fetch-depth: 0
          fetch-tags: 'true'
-         #token: ${{ secrets.ghpattoken }}
+         token: ${{ secrets.ghpattoken }}
         #env:
          #GH_TOKEN: ${{ secrets.ghpattoken }}
         
