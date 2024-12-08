@@ -32,8 +32,8 @@ jobs:
          #GH_TOKEN: ${{ secrets.ghpattoken }}
          #token: ${{ secrets.ghpattoken }}
          #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         GITHUB_TOKEN: ${{ github.token }}
-         GH_TOKEN: ${{ github.token }}
+         #GITHUB_TOKEN: ${{ github.token }} uncomment
+         #GH_TOKEN: ${{ github.token }} uncomment
          
         run: |
          echo ${{ secrets.ghpattoken }}
