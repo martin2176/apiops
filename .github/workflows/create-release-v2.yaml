@@ -23,6 +23,7 @@ jobs:
          ref: 'artifacts'
       - name: Create Release
         run: |
+         echo {{ github.event.inputs.TAG }} {{ github.event.inputs.COMMITID }}
          git tag {{ github.event.inputs.TAG }} {{ github.event.inputs.COMMITID }}
          git push origin {{ inputs.TAG }}
  
