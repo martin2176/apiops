@@ -13,10 +13,8 @@ jobs:
   build:
     name: Create Release v1
     runs-on: ubuntu-latest
-    permissions:
-     contents: write
-     actions: write
-
+    permissions: write-all
+     
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
