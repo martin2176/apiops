@@ -9,8 +9,8 @@ on:
    inputs:
      COMMIT_ID_CHOICE:
       description: |
-        'Choose "publish-all-artifacts-in-repo" only when you want to force republishing all artifacts' 
-        'Otherwise choose between "publish-delta-artifacts-in-specific-commit" or "publish-artifacts-in-last-commit"'
+        Choose "publish-all-artifacts-in-repo" only when you want to force republishing all artifacts
+        Otherwise choose between "publish-delta-artifacts-in-specific-commit" or "publish-artifacts-in-last-commit"
       required: true
       type: choice
       default: "publish-delta-artifacts-in-specific-commit"
