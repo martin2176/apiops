@@ -26,9 +26,9 @@ jobs:
          fetch-tags: 'true'
       - name: Create Release
         env:
-         #GH_TOKEN: ${{ secrets.ghpattoken }}
+         GH_TOKEN: ${{ secrets.ghpattoken }}
          #token: ${{ secrets.ghpattoken }}
-         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
          echo ${{ github.event.inputs.TAG }} ${{ github.event.inputs.COMMITID }}
          git tag ${{ github.event.inputs.TAG }} ${{ github.event.inputs.COMMITID }}
