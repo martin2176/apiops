@@ -6,5 +6,5 @@ apis:
     apiRevision: '1'
     authenticationSettings: {}
     description: 'hello there'
-    displayName: 'test api in development'
+    displayName: 'test api in production'
 
