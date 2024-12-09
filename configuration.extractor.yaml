@@ -1,5 +1,5 @@
 apiNames:
-  - test
+  - lisaapi1
 backendNames:
   - none
 diagnosticNames:
@@ -7,7 +7,7 @@ diagnosticNames:
 loggerNames:
   - none
 namedValueNames:
-  - none
+  - lisaapi1namedvalue
 productNames:
   - none
 subscriptionNames:
