@@ -40,13 +40,15 @@ jobs:
       run: sleep 30
   Deploy-to-Test:
    runs-on: ubuntu-latest
-   environment: dev
+   environment: test
+   needs: Deploy-to-Dev
    steps:
     - name: Deploy-to-Test
       run: sleep 30
   Create-Release:
    runs-on: ubuntu-latest
    environment: test
+   needs: [Deploy-to-Dev,Deploy-to-Test]
    steps:
     - name: create-release
       run: sleep 30      
