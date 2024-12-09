@@ -1,5 +1,5 @@
 apiNames:
-  - echo-api
+  - test
 backendNames:
   - none
 diagnosticNames:
@@ -13,8 +13,10 @@ productNames:
 subscriptionNames:
   - none
 versionSetNames:
-  - 673787548eca5ee65e5867f9
+  - none
 groupNames:
   - none
 PolicyFragmentNames:
+  - none
+tagNames:
   - none
