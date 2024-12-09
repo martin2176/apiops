@@ -1,0 +1,46 @@
+on:
+  workflow_dispatch:
+    inputs:
+      COMMITID:
+        required: true
+        type: string
+      TAG:
+        required: true
+        type: string         
+name: Create Release V2
+
+jobs:
+  build:
+    name: Create Release v1
+    runs-on: ubuntu-latest
+    permissions: write-all
+     
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+         ref: 'artifacts'
+         fetch-depth: 0
+         fetch-tags: 'true'
+         token: ${{ secrets.ghpattoken }}
+         persist-credentials: 'true'
+        #env:
+         #GH_TOKEN: ${{ secrets.ghpattoken }}
+        
+      - name: Create Release
+        
+        env:
+         #GH_TOKEN: ${{ secrets.ghpattoken }}
+         #token: ${{ secrets.ghpattoken }}
+         #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         #GITHUB_TOKEN: ${{ github.token }} uncomment
+         #GH_TOKEN: ${{ github.token }} uncomment
+         foo: bar
+         
+        run: |
+         echo ${{ secrets.ghpattoken }}
+         echo ${{ github.event.inputs.TAG }} ${{ github.event.inputs.COMMITID }}
+         git tag ${{ github.event.inputs.TAG }} ${{ github.event.inputs.COMMITID }}
+         git push origin ${{ inputs.TAG }}
+         
+ 
