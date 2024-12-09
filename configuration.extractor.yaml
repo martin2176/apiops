@@ -1,5 +1,5 @@
 apiNames:
-  - lisaapi1
+  - mattapi1
 backendNames:
   - none
 diagnosticNames:
@@ -7,7 +7,7 @@ diagnosticNames:
 loggerNames:
   - none
 namedValueNames:
-  - lisaapi1namedvalue
+  - none
 productNames:
   - none
 subscriptionNames:
@@ -19,4 +19,4 @@ groupNames:
 PolicyFragmentNames:
   - none
 tagNames:
-  - none
+  - tag1
