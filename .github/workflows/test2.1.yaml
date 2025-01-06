@@ -28,4 +28,6 @@ jobs:
         run: |
              echo {{ inputs.CONFIGURATION_YAML }}
              echo {{ inputs.CONFIGURATION_YAML_PATH }}
+             echo ${{ github.event.inputs.CONFIGURATION_YAML }}
+             echo ${{ github.event.inputs.CONFIGURATION_YAML_PATH }}
              echo ${{ github.triggering_actor }}-configuration.extractor.yaml
