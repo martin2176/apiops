@@ -26,6 +26,7 @@ jobs:
     steps:
       - name: echo config file
         run: |
+             echo "Deploying build:${{ inputs.CONFIGURATION_YAML }} to target:${{ inputs.CONFIGURATION_YAML_PATH }}"
              echo {{ inputs.CONFIGURATION_YAML }}
              echo {{ inputs.CONFIGURATION_YAML_PATH }}
              echo ${{ github.event.inputs.CONFIGURATION_YAML }}
