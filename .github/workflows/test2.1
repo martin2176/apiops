@@ -1,0 +1,31 @@
+name: Extract-From-Dev-APIM-Instance
+on:
+  workflow_dispatch:
+    inputs:
+      CONFIGURATION_YAML:
+        description: 'Choose the Extractor Configuration File'     
+        required: true
+        type: string
+        default:  ${{ github.triggering_actor }}-configuration.extractor.yaml
+      CONFIGURATION_YAML_PATH:
+        description: 'Choose whether to extract all APIM artifacts OR extract only APIM artifacts listed in extractor config file'     
+        required: true
+        type: choice
+        options:
+        - 'Extract Selected APIM Artifacts'
+        - 'Extract All APIM Artifacts'
+concurrency:
+ group: extract-from-dev-apim-instance
+ cancel-in-progress: false    
+
+env:
+  apiops_release_version: v6.0.1.3
+
+jobs:
+  Extract-Artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo config file
+        run: |
+             echo {{ inputs.CONFIGURATION_YAML }}
+             echo {{ inputs.CONFIGURATION_YAML_PATH }}
