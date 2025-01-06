@@ -6,7 +6,6 @@ on:
         description: 'Choose the Extractor Configuration File'     
         required: true
         type: string
-        default:  ${{ github.triggering_actor }}-configuration.extractor.yaml
       CONFIGURATION_YAML_PATH:
         description: 'Choose whether to extract all APIM artifacts OR extract only APIM artifacts listed in extractor config file'     
         required: true
