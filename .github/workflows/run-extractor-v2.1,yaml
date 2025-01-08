@@ -1,4 +1,4 @@
-name: Extract-From-Dev-APIM-Instance
+name: Extract-From-Dev-APIM-Instance-V2.1
 on:
   workflow_dispatch:
     inputs:
@@ -7,7 +7,7 @@ on:
         required: true
         type: string
         default: dev
-      CONFIGURATION_YAML_PATH:
+      EXTRACTOR_OPTION:
         description: 'Choose whether to extract all APIM artifacts OR extract only APIM artifacts listed in extractor config file'     
         required: true
         type: choice
@@ -62,21 +62,24 @@ jobs:
           #Logging__LogLevel__Default: Trace
           #CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration.extractor.yaml
         run: |
-          $var1="${{ github.event.inputs.CONFIGURATION_YAML_PATH }}"
+          $var1="${{ github.event.inputs.EXTRACTOR_OPTION }}"
           $var2="Extract All APIM Artifacts"
           $var3="Extract Selected APIM Artifacts"
           if ($var1 -eq $var3) 
           {
           Write-Output "User have chosen to extract Selected APIM Artifacts"
           echo "Copying extractor configuration file to runner.temp"
-          copy configuration.extractor.yaml $env:RUNNER_TEMP
+          #copy configuration.extractor.yaml $env:RUNNER_TEMP
+          copy ${{ github.triggering_actor }}-configuration.extractor.yaml $env:RUNNER_TEMP/configuration.extractor.yaml
           $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration.extractor.yaml"
-          $env:CONFIGURATION_YAML_PATH
-          $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH
+          Write-Output "Configuration yaml path is $env:CONFIGURATION_YAML_PATH"
+          Write-Output "Api management service output folder path is $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH"
           }
           else
           {
           Write-Output "User have chosen to extract All APIM Artifacts"
+          Write-Output "Configuration yaml path is $env:CONFIGURATION_YAML_PATH"
+          Write-Output "Api management service output folder path is $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH"
           }
           Set-StrictMode -Version Latest
           $ErrorActionPreference = "Stop"
@@ -143,7 +146,7 @@ jobs:
      pull-requests: write
 
     steps:
-      - name: Checkout-Working-Branch
+      - name: Checkout-Artifacts-Branch
         uses: actions/checkout@v4
         with:
          ref: 'artifacts'
