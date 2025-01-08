@@ -1,0 +1,16 @@
+name: concurrency
+on:
+  workflow_dispatch:
+concurrency:
+  group: extract-from-dev-apim-instance
+  cancel-in-progress: false  
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Turnstyle
+        uses: softprops/turnstyle@v2
+      - name: Deploy
+        run: sleep 120

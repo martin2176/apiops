@@ -1,0 +1,13 @@
+name: turnstyle
+on:
+  workflow_dispatch:
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Turnstyle
+        uses: softprops/turnstyle@v2
+      - name: Deploy
+        run: sleep 120
