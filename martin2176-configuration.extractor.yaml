@@ -1,5 +1,6 @@
 apiNames:
   - azurewebappistiodemo
+  - azurefunctionistiodemo
 backendNames:
   - none
 diagnosticNames:
