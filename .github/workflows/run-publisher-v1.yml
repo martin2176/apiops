@@ -1,0 +1,49 @@
+name: Publish-Artifacts-to-APIM-Instance-V1.0
+on:
+   branches: [artifacts]
+   types: [closed]
+
+   workflow_dispatch:
+    inputs:
+     COMMIT_ID_CHOICE:
+      description: 'Choose "publish-all-artifacts-in-repo" only when you want to force republishing all artifacts.Else choose between the other two options"'
+      required: true
+      type: choice
+      default: "publish-artifacts-in-last-commit"
+      options:
+        - "publish-delta-artifacts-in-last-commit"
+        - "publish-all-artifacts-in-repo"
+        - "publish-delta-artifacts-in-specific-commit"
+     REFTOCHECKOUTFOR_ARTIFACTS:
+      description: 'Enter specific Commit ID in Artifacts branch to look for artifacts.Default to the latest commit from Artifacts branch'     
+      required: true
+      type: string
+      default: "artifacts"
+     API_MANAGEMENT_ENVIRONMENT:
+      description: 'Choose the APIM Environment'     
+      required: true
+      type: environment
+      default: "dev"
+	  
+jobs:
+    Set-CommitID:
+     name: Set-CommitID-to-Extract-Artifacts
+     runs-on: ubuntu-latest
+     steps:
+      - name: set-commitid-on-automatic-run-to-merged-pr
+        if:  ${{ github.event.pull_request.merged == true }}
+        id: set-commitid-on-automatic-run-to-merged-pr
+        run: echo "commitid=${GITHUB_SHA}" >> $GITHUB_ENV
+      - name: set-commitid-on-manual-run-to-last-commit
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.REFTOCHECKOUTFOR_ARTIFACTS == 'artifacts' }}
+        id: set-commitid-on-manual-run-to-last-commit
+        run: echo "commitid=$(git rev-parse HEAD)" >> $GITHUB_ENV
+      - name: set-commitid-on-manual-run-to-specific-commit
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.REFTOCHECKOUTFOR_ARTIFACTS != 'artifacts' }}
+        id: set-commitid-on-manual-run-to-specific-commit
+        run: echo "commitid=${{ inputs.REFTOCHECKOUTFOR_ARTIFACTS }}" >> $GITHUB_ENV
+      - name: set-commitid
+        id: set-commitid
+        run: echo "commitid=${commitid}" >> "$GITHUB_OUTPUT"
+     outputs:
+      commit_id: ${{ steps.set-commitid.outputs.commitid }}
