@@ -1,7 +1,8 @@
 name: Publish-Artifacts-to-APIM-Instance-V1.0
 on:
-   branches: [artifacts]
-   types: [closed]
+   pull_request:
+    branches: [artifacts]
+    types: [closed]
 
    workflow_dispatch:
     inputs:
@@ -29,8 +30,14 @@ jobs:
      name: Set-CommitID-to-Extract-Artifacts
      runs-on: ubuntu-latest
      steps:
+      - name: Checkout-Artifacts-Branch
+        uses: actions/checkout@v4
+        with:
+         ref: 'artifacts'
+         fetch-tags: 'false'
+         fetch-depth: 1
       - name: set-commitid-on-automatic-run-to-merged-pr
-        if:  ${{ github.event.pull_request.merged == true }}
+        if:  ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }}
         id: set-commitid-on-automatic-run-to-merged-pr
         run: echo "commitid=${GITHUB_SHA}" >> $GITHUB_ENV
       - name: set-commitid-on-manual-run-to-last-commit
