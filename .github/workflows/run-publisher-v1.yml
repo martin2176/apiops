@@ -24,7 +24,6 @@ on:
       required: true
       type: environment
       default: "dev"
-	  
 jobs:
     Set-CommitID:
      name: Set-CommitID-to-Extract-Artifacts
