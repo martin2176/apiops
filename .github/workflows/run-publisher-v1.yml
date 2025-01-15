@@ -18,7 +18,7 @@ on:
      REFTOCHECKOUTFOR_ARTIFACTS:
       description: 'Enter specific Commit ID in Artifacts branch to look for artifacts.Default to the latest commit from Artifacts branch'     
       required: true
-      type: string
+      type: choice
       default: "artifacts"
      API_MANAGEMENT_ENVIRONMENT:
       description: 'Choose the APIM Environment'     
@@ -56,6 +56,7 @@ jobs:
     
     job2:
      name: job2
+     runs-on: ubuntu-latest
      needs: Set-CommitID-to-Extract-Artifacts
      steps:
       - name: step1
