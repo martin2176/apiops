@@ -1,4 +1,5 @@
 name: Publish-Artifacts-to-APIM-Instance-V1.0
+run-name: Publish-Artifacts-to-APIM-Instance-V1.0
 on:
    pull_request:
     branches: [artifacts]
