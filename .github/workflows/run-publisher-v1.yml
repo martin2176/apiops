@@ -27,7 +27,7 @@ on:
       default: "dev"
 jobs:
     Set-CommitID-to-Extract-Artifacts:
-     if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
+     #if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
      name: Set-CommitID-to-Extract-Artifacts
      runs-on: ubuntu-latest
      steps:
@@ -56,7 +56,7 @@ jobs:
       commitid: ${{ steps.set-commitid.outputs.commitid }}
     
     job2:
-     if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
+     #if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
      name: job2
      runs-on: ubuntu-latest
      needs: Set-CommitID-to-Extract-Artifacts
