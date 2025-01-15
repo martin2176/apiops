@@ -2,9 +2,9 @@ name: Demo Publisher
 
 on:
   # Triggers the workflow on pull request events but only for the main branch
-  pull_request:
-    branches: [main]
-    types: [closed]
+  #pull_request:
+   # branches: [main]
+    #types: [closed]
   workflow_dispatch:    
    # inputs:
      #COMMIT_ID_CHOICE:
