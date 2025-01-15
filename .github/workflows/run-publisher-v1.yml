@@ -20,6 +20,8 @@ on:
       required: true
       type: choice
       default: "artifacts"
+      options:
+       - "artifacts"
      API_MANAGEMENT_ENVIRONMENT:
       description: 'Choose the APIM Environment'     
       required: true
