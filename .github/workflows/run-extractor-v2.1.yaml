@@ -1,4 +1,5 @@
 name: Extract-From-Dev-APIM-Instance-V2.1
+run-name: Extract-From-Dev-APIM-Instance-V2.1
 #martin f k
 on:
   workflow_dispatch:
