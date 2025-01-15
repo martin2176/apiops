@@ -3,6 +3,7 @@ on:
    pull_request:
     branches: 
      - 'artifacts/**'
+     - 'main'
     types: [closed,opened,reopened]
 jobs:
     Set-CommitID-to-Extract-Artifacts:
