@@ -55,8 +55,8 @@ jobs:
       commitid: ${{ steps.set-commitid.outputs.commitid }}
     
     job2:
-     - name: job2
-       needs: Set-CommitID-to-Extract-Artifacts
-       steps:
-        - name: step1
-          run: echo ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.commitid}}
+     name: job2
+     needs: Set-CommitID-to-Extract-Artifacts
+     steps:
+      - name: step1
+        run: echo ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.commitid}}
