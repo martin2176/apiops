@@ -36,16 +36,19 @@ env:
 
 jobs:
   Extract-Artifacts:
+    name: Extract-Artifacts
     runs-on: ubuntu-latest
     environment: dev
 
     steps:
       - name: Checkout-Configuration-File
+        id: Checkout-Configuration-File
         uses: actions/checkout@v4
         with:
          ref: '${{ env.REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH }}'
 
       - name: Run-Extractor
+        id: Run-Extractor
         env:
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -126,6 +129,7 @@ jobs:
         shell: pwsh
       
       - name: Upload-Artifact
+        id: Upload-Artifact
         uses: actions/upload-artifact@v4
         env:
         #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts
@@ -136,6 +140,7 @@ jobs:
           path: ${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
           overwrite: 'false'
   Create-Pull-Request:
+    name: Create-Pull-Request
     needs: Extract-Artifacts
     runs-on: [ubuntu-latest]
     permissions:
@@ -144,6 +149,7 @@ jobs:
 
     steps:
       - name: Checkout-Artifacts-Branch
+        id: Checkout-Artifacts-Branch
         uses: actions/checkout@v4
         with:
          ref: 'artifacts'
@@ -151,6 +157,7 @@ jobs:
          fetch-tags: 'false'
         
       - name: Download-Artifacts-From-Job
+        id: Download-Artifacts-From-Job
         uses: actions/download-artifact@v4
         env:
          API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
@@ -159,6 +166,7 @@ jobs:
           path: "${{ GITHUB.WORKSPACE }}/${{ env.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}"
 
       - name: Create-PR-For-Merging-To-Artifacts-Branch
+        id: Create-PR-For-Merging-To-Artifacts-Branch
         uses: peter-evans/create-pull-request@v6
         #env:
           #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts  # change this to the artifacts folder          
