@@ -1,4 +1,4 @@
-name: Publish-Artifacts-to-APIM-Instance-V1.0
+name: testprtrigger
 on:
    pull_request:
     branches: [artifacts]
