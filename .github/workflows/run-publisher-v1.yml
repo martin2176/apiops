@@ -26,7 +26,7 @@ on:
       type: environment
       default: "dev"
 jobs:
-    Set-CommitID:
+    Set-CommitID-to-Extract-Artifacts:
      name: Set-CommitID-to-Extract-Artifacts
      runs-on: ubuntu-latest
      steps:
@@ -52,4 +52,11 @@ jobs:
         id: set-commitid
         run: echo "commitid=${commitid}" >> "$GITHUB_OUTPUT"
      outputs:
-      commit_id: ${{ steps.set-commitid.outputs.commitid }}
+      commitid: ${{ steps.set-commitid.outputs.commitid }}
+    
+    job2:
+     - name: job2
+       needs: Set-CommitID-to-Extract-Artifacts
+       steps:
+        - name: step1
+          run: echo ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.commitid}}
