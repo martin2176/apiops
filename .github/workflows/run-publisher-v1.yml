@@ -18,10 +18,8 @@ on:
      REFTOCHECKOUTFOR_ARTIFACTS:
       description: 'Enter specific Commit ID in Artifacts branch to look for artifacts.Default to the latest commit from Artifacts branch'     
       required: true
-      type: choice
+      type: string
       default: "artifacts"
-      options:
-       - "artifacts"
      API_MANAGEMENT_ENVIRONMENT:
       description: 'Choose the APIM Environment'     
       required: true
