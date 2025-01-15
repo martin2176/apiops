@@ -1,7 +1,7 @@
 name: testprtrigger
 on:
    pull_request:
-    branches: [artifacts]
+    #branches: ["artifacts"]
     #types: [closed]
 jobs:
     Set-CommitID-to-Extract-Artifacts:
