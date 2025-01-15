@@ -4,7 +4,6 @@ on:
     branches: 
      - 'artifacts'
      - 'main'
-     - 'working'
     types: [closed,opened,reopened]
 jobs:
     Set-CommitID-to-Extract-Artifacts:
