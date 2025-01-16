@@ -56,7 +56,7 @@ jobs:
         id: set-commitid
         run: |
          echo "COMMITID=${COMMITID}" >> "$GITHUB_OUTPUT"
-         echo "PUBLISH_ARTIFACTS_CHOICE=${PUBLISH_ARTIFACTS_CHOICE}" >> "$GITHUB_OUTPUT"
+         echo "PUBLISH_ARTIFACTS_CHOICE=${{ inputs.PUBLISH_ARTIFACTS_CHOICE }}" >> "$GITHUB_OUTPUT"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
