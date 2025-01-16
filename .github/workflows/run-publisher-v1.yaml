@@ -1,0 +1,86 @@
+name: Publish-Artifacts-to-APIM-Instance-V1.0
+run-name: Publish-Artifacts-to-APIM-Instance-V1.0
+on:
+   pull_request:
+    branches: [artifacts]
+    types: [closed]
+
+   workflow_dispatch:
+    inputs:
+     PUBLISH_ARTIFACTS_CHOICE:
+      description: 'Choose "publish-all-artifacts-in-repo" only when you want to force republishing all artifacts.Else choose between the other two options"'
+      required: true
+      type: choice
+      default: "publish-artifacts-in-last-commit"
+      options:
+        - "publish-delta-artifacts-in-last-commit"
+        - "publish-all-artifacts-in-repo"
+        - "publish-delta-artifacts-in-specific-commit"
+     REFTOCHECKOUTFOR_ARTIFACTS:
+      description: 'Enter specific Commit ID in Artifacts branch to look for artifacts.Default to the latest commit from Artifacts branch'     
+      required: true
+      type: string
+      default: "artifacts"
+     API_MANAGEMENT_ENVIRONMENT:
+      description: 'Choose the APIM Environment'     
+      required: true
+      type: environment
+      default: "dev"
+jobs:
+    Set-CommitID-to-Extract-Artifacts:
+     if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
+     name: Set-CommitID-to-Extract-Artifacts
+     runs-on: ubuntu-latest
+     steps:
+      - name: Checkout-Artifacts-Branch
+        uses: actions/checkout@v4
+        with:
+         ref: 'artifacts'
+         fetch-tags: 'false'
+         fetch-depth: 1
+      - name: set-commitid-on-automatic-run-to-merged-pr
+        if:  ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }}
+        id: set-commitid-on-automatic-run-to-merged-pr
+        run: |
+         echo "COMMITID=${GITHUB_SHA}" >> $GITHUB_ENV
+         echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-specific-commit" >> $GITHUB_ENV
+      - name: set-commitid-on-manual-run-to-last-commit
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.REFTOCHECKOUTFOR_ARTIFACTS == 'artifacts' }}
+        id: set-commitid-on-manual-run-to-last-commit
+        run: echo "COMMITID=$(git rev-parse HEAD)" >> $GITHUB_ENV
+      - name: set-commitid-on-manual-run-to-specific-commit
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.REFTOCHECKOUTFOR_ARTIFACTS != 'artifacts' }}
+        id: set-commitid-on-manual-run-to-specific-commit
+        run: echo "COMMITID=${{ inputs.REFTOCHECKOUTFOR_ARTIFACTS }}" >> $GITHUB_ENV
+      - name: set-commitid
+        id: set-commitid
+        run: |
+         echo "COMMITID=${COMMITID}" >> "$GITHUB_OUTPUT"
+         echo "PUBLISH_ARTIFACTS_CHOICE=${PUBLISH_ARTIFACTS_CHOICE}" >> "$GITHUB_OUTPUT"
+     outputs:
+      COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
+      PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
+    
+    Print-Selections:
+     #if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
+     name: Print-Selections
+     runs-on: ubuntu-latest
+     needs: Set-CommitID-to-Extract-Artifacts
+     steps:
+      - name: step1
+        run: |
+         echo "commitid is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID}}"
+         echo "publishartifactschoice is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE}}"
+
+    Deploy-to-Dev-APIM-Instance:
+     needs: Set-CommitID-to-Extract-Artifacts
+     uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
+     with:
+      COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
+      PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
+      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
+      CONFIGURATION_YAML_PATH: configuration.dev.yaml
+      API_MANAGEMENT_ENVIRONMENT: dev
+     secrets: inherit 
+        
+       
