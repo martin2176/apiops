@@ -26,6 +26,7 @@ jobs:
     Print-Input-From-Calling-Workflow:
      name: Print-Input-From-Calling-Workflow
      runs-on: ubuntu-latest
+     environment: ${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
      steps:
       - name: Print-Input-From-Calling-Workflow
         run: |
