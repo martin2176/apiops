@@ -1,2 +1,36 @@
-name: Publish-Artifacts-to-APIM-Envrionment-V1.0
-run-name: Publish-Artifacts-to-APIM-Envrionment-V1.0
+#Reusable workflow
+name: Publish-Artifacts-to-APIM-Environment-V1.0
+run-name: Publish-Artifacts-to-APIM-Environment-V1.0
+on:
+  workflow_call:
+    inputs:
+      API_MANAGEMENT_ENVIRONMENT:
+        required: true
+        type: string
+      CONFIGURATION_YAML_PATH:
+        required: true
+        type: string
+      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH:
+        required: true
+        type: string
+      PUBLISH_ARTIFACTS_CHOICE:
+        required: true
+        type: string
+      COMMITID:
+        required: true
+        type: string      
+concurrency:
+ group: publish-artifacts-to-apim-environment-${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
+ cancel-in-progress: false
+jobs:
+    Print-Input-From-Calling-Workflow:
+     name: Print-Input-From-Calling-Workflow
+     runs-on: ubuntu-latest
+     steps:
+      - name: Print-Input-From-Calling-Workflow
+        run: |
+         echo "apimanagementenvironment is ${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
+         echo "configurationyamlpath is ${{ inputs.CONFIGURATION_YAML_PATH }}
+         echo "apimanagementserviceoutputfolderpath is ${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
+         echo "publishartifacts is ${{ inputs.PUBLISH_ARTIFACTS_CHOICE }}
+         echo "commitid is ${{ inputs.COMMITID }}
