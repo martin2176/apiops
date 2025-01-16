@@ -32,5 +32,5 @@ jobs:
          echo "apimanagementenvironment is ${{ inputs.API_MANAGEMENT_ENVIRONMENT }}"
          echo "configurationyamlpath is ${{ inputs.CONFIGURATION_YAML_PATH }}"
          echo "apimanagementserviceoutputfolderpath is ${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}"
-         echo "publishartifacts is ${{ inputs.PUBLISH_ARTIFACTS_CHOICE }}
+         echo "publishartifacts is ${{ inputs.PUBLISH_ARTIFACTS_CHOICE }}"
          echo "commitid is ${{ inputs.COMMITID }}"
