@@ -136,6 +136,9 @@ jobs:
           elseif ("${{ runner.os }}" -like "*mac*" -and "${{ runner.arch }}" -like "*x86_64*") {
             $releaseFileName = "publisher-osx-x64.zip"
           }
+          Write-Information "Printing out all environment variables in the shell for debugging purpose..."
+          gci env:
+          
           Write-Information "Downloading release..."
           $uri = "https://github.com/Azure/apiops/releases/download/${{ env.apiops_release_version }}/$releaseFileName"
           $downloadFilePath = Join-Path "${{ runner.temp }}" $releaseFileName
