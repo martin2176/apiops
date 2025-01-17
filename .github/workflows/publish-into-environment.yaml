@@ -97,4 +97,24 @@ jobs:
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
           API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
           CONFIGURATION_YAML_PATH: ${{ runner.temp }}/configuration-publisher.yaml
-        run: echo hello  
+        run: |
+          $publish_artifacts_choice="${{ github.event.inputs.PUBLISH_ARTIFACTS_CHOICE }}"
+          if ($publish_artifacts_choice -eq "publish-delta-artifacts-in-last-commit") 
+          {
+          Write-Output "User have chosen to publish Delta Artifacts in Last Commit"
+          $env:COMMIT_ID="$env:COMMITID"
+          Write-Output "Commitid is $env:COMMITID"
+          }
+          
+          if ($publish_artifacts_choice -eq "publish-delta-artifacts-in-specific-commit") 
+          {
+          Write-Output "User have chosen to publish Delta Artifacts in Specific Commit"
+          $env:COMMIT_ID="$env:COMMITID"
+          Write-Output "Commitid is $env:COMMITID"
+          }
+          if ($publish_artifacts_choice -eq "publish-all-artifacts-in-repo") 
+          {
+          Write-Output "User have chosen to publish All Artifacts"
+          Write-Output "Commitid is NULL(NULL because a specific Commitid is not set)"
+          }
+        
