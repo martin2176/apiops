@@ -13,19 +13,23 @@ on:
       type: choice
       default: "publish-artifacts-in-last-commit"
       options:
-        - "publish-delta-artifacts-in-last-commit"
-        - "publish-all-artifacts-in-repo"
-        - "publish-delta-artifacts-in-specific-commit"
+       - "publish-delta-artifacts-in-last-commit"
+       - "publish-all-artifacts-in-repo"
+       - "publish-delta-artifacts-in-specific-commit"
      REFTOCHECKOUTFOR_ARTIFACTS:
       description: 'Enter specific Commit ID in Artifacts branch to look for artifacts.Default to the latest commit from Artifacts branch'     
       required: true
       type: string
       default: "artifacts"
      API_MANAGEMENT_ENVIRONMENT:
+      #this input is not required
       description: 'Choose the APIM Environment'     
       required: true
-      type: environment
+      type: choice
       default: "dev"
+      options:
+       - "dev"
+       - "test"
 jobs:
     Set-CommitID-to-Extract-Artifacts:
      if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
