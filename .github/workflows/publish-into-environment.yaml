@@ -157,5 +157,5 @@ jobs:
 #          & "$executableFilePath"              
 #          if ($LASTEXITCODE -ne 0) { throw "Running publisher failed."}
 
-          Write-Information "Execution complete."     
+#          Write-Information "Execution complete."     
           
