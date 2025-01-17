@@ -22,6 +22,11 @@ on:
 concurrency:
  group: publish-artifacts-to-apim-environment-${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
  cancel-in-progress: false
+
+env:
+  apiops_release_version: v6.0.1.3
+  Logging__LogLevel__Default: ${{ vars.LOG_LEVEL }}
+  
 jobs:
     Print-Input-From-Calling-Workflow:
      name: Print-Input-From-Calling-Workflow
@@ -29,9 +34,24 @@ jobs:
      environment: ${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
      steps:
       - name: Print-Input-From-Calling-Workflow
+        id: print-input-from-calling-workflow
         run: |
          echo "apimanagementenvironment is ${{ inputs.API_MANAGEMENT_ENVIRONMENT }}"
          echo "configurationyamlpath is ${{ inputs.CONFIGURATION_YAML_PATH }}"
          echo "apimanagementserviceoutputfolderpath is ${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}"
          echo "publishartifacts is ${{ inputs.PUBLISH_ARTIFACTS_CHOICE }}"
          echo "commitid is ${{ inputs.COMMITID }}"
+      - name: Checkout-Dev-Branch
+        id: checkout-dev-branch
+        if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'dev' }}
+        uses: actions/checkout@v4
+        with:
+         ref: 'dev'
+      - name: Copy-Dev-ConfigurationOverride-File
+        id: copy-dev-configurationoverride-file
+        if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'dev' }}
+        run: |
+         echo "Copying override configuration file to runner.temp"
+         copy configuration.dev.yaml $RUNNER_TEMP/configuration.dev.yaml
+         echo "Cat-ing override configuration file"
+         cat $RUNNER_TEMP/configuration.dev.yaml
