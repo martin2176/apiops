@@ -56,7 +56,7 @@ jobs:
          echo "Copying override configuration file to runner.temp"
          cp configuration-dev.yaml $RUNNER_TEMP/configuration-publisher.yaml
          echo "Cat-ing override configuration file"
-         cat $RUNNER_TEMP/configuration-publisher.yaml
+         cat ${RUNNER_TEMP}/configuration-publisher.yaml
       - name: Checkout-Test-Branch
         id: checkout-test-branch
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'test' }}
@@ -70,7 +70,7 @@ jobs:
          echo "Copying override configuration file to runner.temp"
          cp configuration-test.yaml $RUNNER_TEMP/configuration-publisher.yaml
          echo "Cat-ing override configuration file"
-         cat $RUNNER_TEMP/configuration-publisher.yaml
+         cat ${RUNNER_TEMP}/configuration-publisher.yaml
       - name: Checkout-Prod-Branch
         id: checkout-prod-branch
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'prod' }}
@@ -84,7 +84,7 @@ jobs:
          echo "Copying override configuration file to runner.temp"
          cp configuration-prod.yaml $RUNNER_TEMP/configuration-publisher.yaml
          echo "Cat-ing override configuration file"
-         cat $RUNNER_TEMP/configuration-publisher.yaml
+         cat ${RUNNER_TEMP}/configuration-publisher.yaml
       - name: Run-Publisher
         id: run-publisher
         shell: pwsh
