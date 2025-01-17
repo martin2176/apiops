@@ -153,9 +153,9 @@ jobs:
             if ($LASTEXITCODE -ne 0) { throw "Setting file permissions failed."}
           }
 
-          Write-Information "Running publisher..."
-          & "$executableFilePath"              
-          if ($LASTEXITCODE -ne 0) { throw "Running publisher failed."}
+          #Write-Information "Running publisher..."
+          #& "$executableFilePath"              
+          #if ($LASTEXITCODE -ne 0) { throw "Running publisher failed."}
 
           Write-Information "Execution complete."     
           
