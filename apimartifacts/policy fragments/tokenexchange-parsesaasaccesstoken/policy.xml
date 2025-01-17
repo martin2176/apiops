@@ -1,6 +1,0 @@
-<fragment>
-	<set-variable name="expires_in" value="@((String)((IResponse)context.Variables["idpaccesstoken"]).Body.As<JObject>(preserveContent: true)["expires_in"])" />
-	<set-variable name="access_token" value="@((String)((IResponse)context.Variables["idpaccesstoken"]).Body.As<JObject>(preserveContent: true)["access_token"])" />
-	<set-variable name="accesstoken-exp" value="@(int.Parse((string)context.Variables["expires_in"])-120)" />
-	<set-variable name="accesstoken-cacheduration" value="@(int.Parse((string)context.Variables["expires_in"])-60)" />
-</fragment>
