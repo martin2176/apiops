@@ -61,7 +61,7 @@ jobs:
           API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts
           API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }}
           #Logging__LogLevel__Default: Trace
-          #CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration.extractor.yaml
+          #CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration-extractor.yaml
         run: |
           $var1="${{ github.event.inputs.EXTRACTOR_OPTION }}"
           $var2="Extract All APIM Artifacts"
@@ -70,9 +70,9 @@ jobs:
           {
           Write-Output "User have chosen to extract Selected APIM Artifacts"
           echo "Copying extractor configuration file to runner.temp"
-          #copy configuration.extractor.yaml $env:RUNNER_TEMP
-          copy ${{ github.triggering_actor }}-configuration.extractor.yaml $env:RUNNER_TEMP/configuration.extractor.yaml
-          $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration.extractor.yaml"
+          #copy configuration-extractor.yaml $env:RUNNER_TEMP
+          copy ${{ github.triggering_actor }}-configuration-extractor.yaml $env:RUNNER_TEMP/configuration-extractor.yaml
+          $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration-extractor.yaml"
           Write-Output "Configuration yaml path is $env:CONFIGURATION_YAML_PATH"
           Write-Output "Api management service output folder path is $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH"
           }
