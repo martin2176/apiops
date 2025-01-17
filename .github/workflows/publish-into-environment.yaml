@@ -52,7 +52,7 @@ jobs:
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'dev' }}
         run: |
          echo "Copying override configuration file to runner.temp"
-         copy configuration.dev.yaml $RUNNER_TEMP/configuration.dev.yaml
+         cp configuration.dev.yaml $RUNNER_TEMP/configuration.dev.yaml
          echo "Cat-ing override configuration file"
          cat $RUNNER_TEMP/configuration.dev.yaml
       - name: Checkout-Test-Branch
@@ -66,7 +66,7 @@ jobs:
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'test' }}
         run: |
          echo "Copying override configuration file to runner.temp"
-         copy configuration.test.yaml $RUNNER_TEMP/configuration.test.yaml
+         cp configuration.test.yaml $RUNNER_TEMP/configuration.test.yaml
          echo "Cat-ing override configuration file"
          cat $RUNNER_TEMP/configuration.test.yaml
       - name: Checkout-Prod-Branch
@@ -80,6 +80,6 @@ jobs:
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'prod' }}
         run: |
          echo "Copying override configuration file to runner.temp"
-         copy configuration.prod.yaml $RUNNER_TEMP/configuration.prod.yaml
+         cp configuration.prod.yaml $RUNNER_TEMP/configuration.prod.yaml
          echo "Cat-ing override configuration file"
          cat $RUNNER_TEMP/configuration.prod.yaml
