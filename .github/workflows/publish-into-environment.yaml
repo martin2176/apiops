@@ -140,3 +140,8 @@ jobs:
           $uri = "https://github.com/Azure/apiops/releases/download/${{ env.apiops_release_version }}/$releaseFileName"
           $downloadFilePath = Join-Path "${{ runner.temp }}" $releaseFileName
           Invoke-WebRequest -Uri "$uri" -OutFile "$downloadFilePath"
+          
+          Write-Information "Extracting release..."
+          $executableFolderPath = Join-Path "${{ runner.temp }}" "publisher"
+          Expand-Archive -Path "$downloadFilePath" -DestinationPath "$executableFolderPath"
+          $executableFilePath = Join-Path "$executableFolderPath" $executableFileName          
