@@ -117,4 +117,22 @@ jobs:
           Write-Output "User have chosen to publish All Artifacts"
           Write-Output "Commitid is NULL(NULL because a specific Commitid is not set)"
           }
-        
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = "Stop"
+          $VerbosePreference = "Continue"
+          $InformationPreference = "Continue"
+
+          Write-Information "Setting name variables..."
+          $releaseFileName = "publisher-linux-x64.zip"
+          $executableFileName = "publisher"
+
+          if ("${{ runner.os }}" -like "*win*") {
+            $releaseFileName = "publisher-win-x64.zip"
+            $executableFileName = "publisher.exe"
+          }
+          elseif ("${{ runner.os }}" -like "*mac*" -and "${{ runner.arch }}" -like "*arm*") {
+            $releaseFileName = "publisher-osx-arm64.zip"
+          }
+          elseif ("${{ runner.os }}" -like "*mac*" -and "${{ runner.arch }}" -like "*x86_64*") {
+            $releaseFileName = "publisher-osx-x64.zip"
+          }        
