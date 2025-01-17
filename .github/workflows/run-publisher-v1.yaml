@@ -75,14 +75,13 @@ jobs:
      runs-on: ubuntu-latest
      needs: Set-CommitID-to-Extract-Artifacts
      steps:
-      - name: print-user-Selections
+      - name: print-user-selections
         id: print-user-selections
         run: |
          echo "commit id: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID}}"
          echo "publish artifacts choice: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE}}"
 
     Deploy-to-Dev-APIM-Instance:
-     needs: Set-CommitID-to-Extract-Artifacts
      uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
      with:
       COMMITID: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
