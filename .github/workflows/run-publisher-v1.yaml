@@ -83,7 +83,7 @@ jobs:
 
     Deploy-to-Dev-APIM-Instance:
      needs: Set-CommitID-to-Extract-Artifacts
-     uses: uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
+     uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
      with:
       COMMITID: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE }}
