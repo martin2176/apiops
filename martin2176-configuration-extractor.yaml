@@ -1,6 +1,5 @@
 apiNames:
-  - azurewebappistiodemo
-  - azurefunctionistiodemo
+  - martin-petstore
 backendNames:
   - none
 diagnosticNames:
