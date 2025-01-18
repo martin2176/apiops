@@ -1,5 +1,5 @@
-name: PR-Merge-Trigger-On-Artifacts-Branch
-run-name: PR-Merge-Trigger-On-Artifacts-Branch
+name: PRMerge-TriggerTo-Publish-to-Dev-Test-CreateRelease
+run-name: PRMerge-TriggerTo-Publish-to-Dev-Test-CreateRelease
 on:
    pull_request:
     branches: [artifacts]
@@ -28,7 +28,7 @@ jobs:
       - name: print-user-selections
         id: print-user-selections
         run: |
-         echo "commit id: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID}}"
+         echo "ref to checkout artifacts(commitid): ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID}}"
          echo "publish artifacts choice: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE}}"
     Deploy-to-Dev-APIM-Instance:
      needs: Set-CommitID-to-Extract-Artifacts
