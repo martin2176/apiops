@@ -41,8 +41,7 @@ jobs:
          echo "configurationyamlpath is ${{ inputs.CONFIGURATION_YAML_PATH }}"
          echo "apimanagementserviceoutputfolderpath is ${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}"
          echo "publishartifactschoice is ${{ inputs.PUBLISH_ARTIFACTS_CHOICE }}"
-         echo "commitid retrieved from context is ${{ inputs.COMMITID }}"
-         echo "commitid retrieved from env variable is ${COMMITID}"
+         echo "commitid is: ${COMMITID}"
       - name: Checkout-Dev-Branch
         id: checkout-dev-branch
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'dev' }}
