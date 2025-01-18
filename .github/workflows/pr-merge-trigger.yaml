@@ -11,7 +11,8 @@ jobs:
      if: startsWith(github.head_ref, 'working')
      name: Set-CommitID-to-Extract-Artifacts
      runs-on: ubuntu-latest
-     - name: set-commitid
+     steps:
+      - name: set-commitid
         id: set-commitid
         run: |
          echo "COMMITID=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
