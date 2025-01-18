@@ -11,25 +11,11 @@ jobs:
      if: startsWith(github.head_ref, 'working')
      name: Set-CommitID-to-Extract-Artifacts
      runs-on: ubuntu-latest
-     steps:
-      - name: checkout-artifacts-branch
-        id: checkout-artifacts-branch
-        uses: actions/checkout@v4
-        with:
-         ref: 'artifacts'
-         fetch-tags: 'false'
-         fetch-depth: 1
-      - name: set-commitid-on-automatic-run-to-merged-pr
-        if:  ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }}
-        id: set-commitid-on-automatic-run-to-merged-pr
-        run: |
-         echo "COMMITID=${GITHUB_SHA}" >> $GITHUB_ENV
-         echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-specific-commit" >> $GITHUB_ENV
-      - name: set-commitid
+     - name: set-commitid
         id: set-commitid
         run: |
-         echo "COMMITID=${COMMITID}" >> "$GITHUB_OUTPUT"
-         echo "PUBLISH_ARTIFACTS_CHOICE=${{ inputs.PUBLISH_ARTIFACTS_CHOICE }}" >> "$GITHUB_OUTPUT"
+         echo "COMMITID=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+         echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-last-commit" >> "$GITHUB_OUTPUT"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
