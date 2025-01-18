@@ -1,5 +1,5 @@
-name: PRMerge-TriggerTo-Publish-to-Dev-Test-CreateRelease
-run-name: PRMerge-TriggerTo-Publish-to-Dev-Test-CreateRelease
+name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease
+run-name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease
 on:
    pull_request:
     branches: [artifacts]
