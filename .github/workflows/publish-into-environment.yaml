@@ -84,6 +84,19 @@ jobs:
          cp configuration-prod.yaml ${RUNNER_TEMP}/configuration-publisher.yaml
          echo "Cat-ing override configuration file"
          cat ${RUNNER_TEMP}/configuration-publisher.yaml
+      - name: Checkout-Artifacts-Branch
+        id: checkout-artifacts-branch
+        uses: actions/checkout@v4
+        with:
+         ref: 'artifacts'
+         fetch-tags: 'true'
+         fetch-depth: 10
+      - name: List-Files-In-Artifacts-Branch
+        id: list-files-in-artifacts-branch
+        run: |
+         echo "Listing files in Artifacts branch"
+         ls -al ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
+         ls -d ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
       - name: Run-Publisher
         id: run-publisher
         shell: pwsh
