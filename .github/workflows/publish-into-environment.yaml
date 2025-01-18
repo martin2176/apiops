@@ -94,9 +94,8 @@ jobs:
       - name: List-Files-In-Artifacts-Branch
         id: list-files-in-artifacts-branch
         run: |
-         echo "Listing files in Artifacts branch"
+         echo "Listing top level files and directories in Artifacts branch"
          ls -al ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
-         ls -d ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
       - name: Run-Publisher
         id: run-publisher
         shell: pwsh
