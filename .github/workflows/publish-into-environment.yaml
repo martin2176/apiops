@@ -1,6 +1,6 @@
 #Reusable workflow
-name: Publish-Artifacts-to-APIM-Environment-V1.0
-run-name: Publish-Artifacts-to-APIM-Environment-V1.0
+name: Publish-Artifacts-to-APIM-Environment
+run-name: Publish-Artifacts-to-APIM-Environment
 on:
   workflow_call:
     inputs:
