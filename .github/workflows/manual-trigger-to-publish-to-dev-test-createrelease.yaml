@@ -13,16 +13,16 @@ on:
        - "publish-all-artifacts-in-repo"
        - "publish-delta-artifacts-in-specific-commit"
      REFTOCHECKOUTFOR_ARTIFACTS:
-      description: 'Enter specific Commit ID in Artifacts branch to look for artifacts.Default to the latest commit from Artifacts branch'     
+      description: 'Enter specific Commit ID in Artifacts branch to look for artifacts.Default to the latest(last) commit'     
       required: true
       type: string
-      default: "artifacts"
+      default: "last commit"
 env:
   APIOPS_REPO: 'martin2176/apiops'
+  REFTOCHECKOUTFOR_ARTIFACTS: ${{ inputs.REFTOCHECKOUTFOR_ARTIFACTS == 'last commit' && 'artifacts ' || 'inputs.REFTOCHECKOUTFOR_ARTIFACTS' }}
   
 jobs:
     Set-CommitID-to-Extract-Artifacts:
-     if:  ${{ github.event_name == 'workflow_dispatch' }}
      name: Set-CommitID-to-Extract-Artifacts
      runs-on: ubuntu-latest
      steps:
