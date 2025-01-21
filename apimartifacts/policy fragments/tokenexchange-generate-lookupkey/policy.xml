@@ -1,8 +1,0 @@
-<fragment>
-	<set-variable name="tokenlookupkey" value="@(context.Variables.GetValueOrDefault<String>("username")+(context.Subscription.Id)+(context.Api.Name))" />
-	<set-variable name="tokenlookupkeyhash" value="@{
-		System.Security.Cryptography.HMACSHA256 hasher = new System.Security.Cryptography.HMACSHA256(System.Text.Encoding.UTF8.GetBytes("foobar"));
-        return Convert.ToBase64String(hasher.ComputeHash(System.Text.Encoding.UTF8.GetBytes((string)context.Variables["tokenlookupkey"])));
-        }" />
-	<set-variable name="tokenlookupkeyhash-exp" value="@(context.Variables.GetValueOrDefault<String>("tokenlookupkeyhash")+"-exp")" />
-</fragment>

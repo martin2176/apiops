@@ -1,4 +1,0 @@
-<fragment>
-	<set-variable name="saasidpcredential" value="@((string)(context.Variables.GetValueOrDefault<String>("username") + ":" + context.Variables.GetValueOrDefault<String>("password") + ":" + "saasidppassword"))" />
-	<set-variable name="saasidpcredentialbase64enc" value="@(System.Convert.ToBase64String(Encoding.UTF8.GetBytes((string)context.Variables["saasidpcredential"])))" />
-</fragment>
