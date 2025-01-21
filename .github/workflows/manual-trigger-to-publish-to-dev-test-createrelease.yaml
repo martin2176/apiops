@@ -17,15 +17,6 @@ on:
       required: true
       type: string
       default: "artifacts"
-     #API_MANAGEMENT_ENVIRONMENT:
-      #this input is not required
-      #description: 'Choose the APIM Environment'     
-      #required: true
-      #type: choice
-      #default: "dev"
-      #options:
-       #- "dev"
-       #- "test"
 env:
   APIOPS_REPO: 'martin2176/apiops'
   
