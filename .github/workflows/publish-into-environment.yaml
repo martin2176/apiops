@@ -18,7 +18,10 @@ on:
         type: string
       COMMITID:
         required: true
-        type: string      
+        type: string
+      BRANCH_TO_DEPLOY_FROM:
+        required: true
+        type: string
 concurrency:
  group: publish-artifacts-to-apim-environment-${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
  cancel-in-progress: false
@@ -88,9 +91,9 @@ jobs:
         id: checkout-artifacts-branch
         uses: actions/checkout@v4
         with:
-         ref: 'artifacts'
+         ref: '${{ inputs.BRANCH_TO_DEPLOY_FROM }}'
          fetch-tags: 'true'
-         fetch-depth: 10
+         fetch-depth: 15
       - name: List-Files-In-Artifacts-Branch
         id: list-files-in-artifacts-branch
         run: |
