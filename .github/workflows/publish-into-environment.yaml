@@ -57,7 +57,7 @@ jobs:
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'dev' }}
         run: |
          echo "Copying override configuration file to runner.temp"
-         cp configuration-dev.yaml ${RUNNER_TEMP}/configuration-publisher.yaml
+         cp configuration-publisher-dev.yaml ${RUNNER_TEMP}/configuration-publisher.yaml
          echo "Cat-ing override configuration file"
          cat ${RUNNER_TEMP}/configuration-publisher.yaml
       - name: Checkout-Test-Branch
@@ -71,7 +71,7 @@ jobs:
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'test' }}
         run: |
          echo "Copying override configuration file to runner.temp"
-         cp configuration-test.yaml ${RUNNER_TEMP}/configuration-publisher.yaml
+         cp configuration-publisher-test.yaml ${RUNNER_TEMP}/configuration-publisher.yaml
          echo "Cat-ing override configuration file"
          cat ${RUNNER_TEMP}/configuration-publisher.yaml
       - name: Checkout-Prod-Branch
@@ -85,7 +85,7 @@ jobs:
         if: ${{ inputs.API_MANAGEMENT_ENVIRONMENT == 'prod' }}
         run: |
          echo "Copying override configuration file to runner.temp"
-         cp configuration-prod.yaml ${RUNNER_TEMP}/configuration-publisher.yaml
+         cp configuration-publisher-prod.yaml ${RUNNER_TEMP}/configuration-publisher.yaml
          echo "Cat-ing override configuration file"
          cat ${RUNNER_TEMP}/configuration-publisher.yaml
       - name: Checkout-Artifacts-Branch
@@ -95,10 +95,10 @@ jobs:
          ref: '${{ inputs.BRANCH_TO_DEPLOY_FROM }}'
          fetch-tags: 'true'
          fetch-depth: 15
-      - name: List-Files-In-Artifacts-Branch
-        id: list-files-in-artifacts-branch
+      - name: List-Artifacts-Files
+        id: list-artifact-files
         run: |
-         echo "Listing top level files and directories in Artifacts branch"
+         echo "Listing the top level artifact files and directories"
          ls -al ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
       - name: Run-Publisher
         id: run-publisher
