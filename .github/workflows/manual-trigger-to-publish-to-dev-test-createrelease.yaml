@@ -63,7 +63,7 @@ jobs:
 
     Deploy-to-Dev-APIM-Instance:
      name: Deploy-to-Dev-APIM-Instance
-     needs: [Print-User-Selections,Set-CommitID-to-Extract-Artifacts]
+     needs: [Set-CommitID-to-Extract-Artifacts,Print-User-Selections]
      uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
      with:
       COMMITID: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
@@ -76,7 +76,7 @@ jobs:
 
     Deploy-to-Test-APIM-Instance:
      name: Deploy-to-Test-APIM-Instance
-     needs: [Print-User-Selections,Set-CommitID-to-Extract-Artifacts,Deploy-to-Dev-APIM-Instance]
+     needs: [Set-CommitID-to-Extract-Artifacts,Print-User-Selections,Deploy-to-Dev-APIM-Instance]
      uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
      with:
       COMMITID: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
