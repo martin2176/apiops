@@ -20,7 +20,7 @@ jobs:
          ref: 'artifacts'
          fetch-depth: 0
          fetch-tags: 'true'
-         persist-credentials: 'true'
+         #persist-credentials: 'true'
          token: ${{ secrets.ghpattoken }}         
       - name: Create Release
         id: create_release

@@ -90,12 +90,28 @@ jobs:
     Create-Production-Ready-Release:
      name: Create-Production-Ready-Release
      needs: [Print-User-Selections,Set-CommitID-to-Extract-Artifacts,Deploy-to-Dev-APIM-Instance,Deploy-to-Test-APIM-Instance]
-     uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
-     with:
-      COMMITID: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
-      PUBLISH_ARTIFACTS_CHOICE: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE }}
-      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
-      CONFIGURATION_YAML_PATH: configuration-publisher-test.yaml
-      API_MANAGEMENT_ENVIRONMENT: test
-      BRANCH_TO_DEPLOY_FROM: artifacts
-     secrets: inherit     
+     runs-on: ubuntu-latest
+     steps:
+      - name: checkout-artifacts-branch
+        id: checkout-artifacts-branch
+        uses: actions/checkout@v4
+        with:
+         ref: 'artifacts'
+         fetch-tags: 'true'
+         fetch-depth: 0
+         token: ${{ secrets.ghpattoken }}         
+      - name: create-release-tag
+        id: create-release-tag
+        uses: actions/create-release@v1
+        env:
+         GITHUB_TOKEN: ${{ secrets.ghpattoken }}
+        with:
+          commitish : ${{ inputs.COMMITID }}
+          release_name: Release ${{ inputs.TAG }}
+          tag_name: ${{ inputs.TAG }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false  
