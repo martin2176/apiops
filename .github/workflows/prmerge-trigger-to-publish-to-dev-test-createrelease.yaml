@@ -61,3 +61,24 @@ jobs:
       API_MANAGEMENT_ENVIRONMENT: test
       BRANCH_TO_DEPLOY_FROM: artifacts
      secrets: inherit
+
+    Create-Production-Ready-Release:
+     name: Create-Production-Ready-Release
+     needs: [Set-CommitID-to-Extract-Artifacts,Print-User-Selections,Deploy-to-Dev-APIM-Instance,Deploy-to-Test-APIM-Instance]
+     runs-on: ubuntu-latest
+     steps:
+      - name: checkout-artifacts-branch
+        id: checkout-artifacts-branch
+        uses: actions/checkout@v4
+        with:
+         ref: 'artifacts'
+         fetch-tags: 'true'
+         fetch-depth: 0
+         token: ${{ secrets.ghpattoken }}         
+      - name: create-release-tag
+        id: create-release-tag
+        run: |
+         echo "pr number is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}"
+         echo "shortcommit is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}"
+         git tag release-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
+         git push origin release-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
