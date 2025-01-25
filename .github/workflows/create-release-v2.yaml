@@ -17,7 +17,7 @@ jobs:
      
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
          ref: 'artifacts'
          fetch-depth: 0
@@ -27,7 +27,7 @@ jobs:
         #env:
          #GH_TOKEN: ${{ secrets.ghpattoken }}
         
-      - name: Create Release
+      - name: Create Tag
         
         env:
          #GH_TOKEN: ${{ secrets.ghpattoken }}
@@ -35,7 +35,6 @@ jobs:
          #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          #GITHUB_TOKEN: ${{ github.token }} uncomment
          #GH_TOKEN: ${{ github.token }} uncomment
-         foo: bar
          
         run: |
          echo ${{ secrets.ghpattoken }}
