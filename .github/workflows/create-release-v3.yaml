@@ -14,16 +14,17 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: checkout-artifacts
+        id: checkout-artifacts
         uses: actions/checkout@v4
         with:
          ref: 'artifacts'
          fetch-depth: 0
          fetch-tags: 'true'
-         #persist-credentials: 'true'
+         persist-credentials: 'true'
          token: ${{ secrets.ghpattoken }}         
-      - name: Create Release
-        id: create_release
+      - name: create-release-tag
+        id: create-release-tag
         uses: actions/create-release@v1
         env:
          GITHUB_TOKEN: ${{ secrets.ghpattoken }}
