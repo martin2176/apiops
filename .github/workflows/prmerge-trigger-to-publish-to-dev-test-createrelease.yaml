@@ -16,7 +16,8 @@ jobs:
         run: |
          echo "COMMITID=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
          echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-last-commit" >> "$GITHUB_OUTPUT"
-         echo "COMMITID_SHORT=$(git rev-parse --short ${GITHUB_SHA})" >> "$GITHUB_OUTPUT"
+         #echo "COMMITID_SHORT=$(git rev-parse --short ${GITHUB_SHA})" >> "$GITHUB_OUTPUT"
+         echo "COMMITID_SHORT=$(echo ${GITHUB_SHA} | cut -c1-7)" >> "$GITHUB_OUTPUT"
          echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
@@ -80,5 +81,5 @@ jobs:
         run: |
          echo "pr number is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}"
          echo "shortcommit is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}"
-         git tag release-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
-         git push origin release-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
+         git tag release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
+         git push origin release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
