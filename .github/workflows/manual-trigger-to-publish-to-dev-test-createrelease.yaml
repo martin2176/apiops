@@ -63,7 +63,7 @@ jobs:
 
     Deploy-to-Dev-APIM-Instance:
      name: Deploy-to-Dev-APIM-Instance
-     needs: Set-CommitID-to-Extract-Artifacts
+     needs: [Print-User-Selections,Set-CommitID-to-Extract-Artifacts]
      uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
      with:
       COMMITID: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
@@ -76,7 +76,7 @@ jobs:
 
     Deploy-to-Test-APIM-Instance:
      name: Deploy-to-Test-APIM-Instance
-     needs: Set-CommitID-to-Extract-Artifacts
+     needs: [Print-User-Selections,Set-CommitID-to-Extract-Artifacts,Deploy-to-Dev-APIM-Instance]
      uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
      with:
       COMMITID: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
@@ -86,3 +86,16 @@ jobs:
       API_MANAGEMENT_ENVIRONMENT: test
       BRANCH_TO_DEPLOY_FROM: artifacts
      secrets: inherit
+
+    Create-Production-Ready-Release:
+     name: Create-Production-Ready-Release
+     needs: [Print-User-Selections,Set-CommitID-to-Extract-Artifacts,Deploy-to-Dev-APIM-Instance,Deploy-to-Test-APIM-Instance]
+     uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
+     with:
+      COMMITID: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
+      PUBLISH_ARTIFACTS_CHOICE: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE }}
+      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
+      CONFIGURATION_YAML_PATH: configuration-publisher-test.yaml
+      API_MANAGEMENT_ENVIRONMENT: test
+      BRANCH_TO_DEPLOY_FROM: artifacts
+     secrets: inherit     

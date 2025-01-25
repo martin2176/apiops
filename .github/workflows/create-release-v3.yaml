@@ -1,0 +1,38 @@
+on:
+  workflow_dispatch:
+    inputs:
+      COMMITID:
+        required: true
+        type: string
+      TAG:
+        required: true
+        type: string         
+name: Create Release
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+         ref: 'artifacts'
+         fetch-depth: 0
+         fetch-tags: 'true'
+         persist-credentials: 'true'        
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commitish : ${{ inputs.COMMITID }}
+          release_name: Release ${{ inputs.TAG }}
+          tag_name: ${{ inputs.TAG }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false    
