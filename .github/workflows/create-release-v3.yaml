@@ -7,7 +7,7 @@ on:
       TAG:
         required: true
         type: string         
-name: Create Release
+name: Create Release - V3
 
 jobs:
   build:
