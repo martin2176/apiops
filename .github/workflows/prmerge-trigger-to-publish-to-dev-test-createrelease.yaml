@@ -16,10 +16,13 @@ jobs:
         run: |
          echo "COMMITID=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
          echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-last-commit" >> "$GITHUB_OUTPUT"
+         echo "COMMITID_SHORT=$(git rev-parse --short ${GITHUB_SHA})" >> "$GITHUB_OUTPUT"
+         echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
-    
+      COMMITID_SHORT: ${{ steps.set-commitid.outputs.COMMITID_SHORT }}
+      PULL_REQUEST_NUMBER: ${{ steps.set-commitid.outputs.PULL_REQUEST_NUMBER }}
     Print-User-Selections:
      name: Print-User-Selections
      runs-on: ubuntu-latest
@@ -30,7 +33,8 @@ jobs:
         run: |
          echo "ref to checkout artifacts(commitid): ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID}}"
          echo "publish artifacts choice: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE}}"
-         echo "pr number: ${{ github.event.pull_request.number }}"
+         echo "pr number: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}"
+         echo "commitid short: ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}"
 
     Deploy-to-Dev-APIM-Instance:
      name: Deploy-to-Dev-APIM-Instance
@@ -43,7 +47,6 @@ jobs:
       CONFIGURATION_YAML_PATH: configuration-publisher-dev.yaml
       API_MANAGEMENT_ENVIRONMENT: dev
       BRANCH_TO_DEPLOY_FROM: artifacts
-      PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}      
      secrets: inherit
 
     Deploy-to-Test-APIM-Instance:
@@ -57,5 +60,4 @@ jobs:
       CONFIGURATION_YAML_PATH: configuration-publisher-test.yaml
       API_MANAGEMENT_ENVIRONMENT: test
       BRANCH_TO_DEPLOY_FROM: artifacts
-      PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
      secrets: inherit
