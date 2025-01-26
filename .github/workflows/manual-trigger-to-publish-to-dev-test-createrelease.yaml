@@ -89,7 +89,7 @@ jobs:
 
     Create-Production-Ready-Release:
      name: Create-Production-Ready-Release
-     needs: [Print-User-Selections,Set-CommitID-to-Extract-Artifacts,Deploy-to-Dev-APIM-Instance,Deploy-to-Test-APIM-Instance]
+     needs: [Set-CommitID-to-Extract-Artifacts,Print-User-Selections,Deploy-to-Dev-APIM-Instance,Deploy-to-Test-APIM-Instance]
      runs-on: ubuntu-latest
      steps:
       - name: checkout-artifacts-branch
@@ -102,16 +102,19 @@ jobs:
          token: ${{ secrets.ghpattoken }}         
       - name: create-release-tag
         id: create-release-tag
-        uses: actions/create-release@v1
-        env:
-         GITHUB_TOKEN: ${{ secrets.ghpattoken }}
-        with:
-          commitish : ${{ inputs.COMMITID }}
-          release_name: Release ${{ inputs.TAG }}
-          tag_name: ${{ inputs.TAG }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false  
+        run: |
+         echo "___________________"
+         COMMITID="${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
+         echo "commit id is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
+         echo "commitid is ${COMMITID}"
+         COMMITID_SHORT="$(echo ${COMMITID} | cut -c1-7)"
+         echo "commitidshort is $COMMITID_SHORT"
+         PULL_REQUEST_NUMBER="$(gh pr list --search "${COMMITID}" --state merged --json url --jq ".[0].url"  | awk -F'/' '{print $NF}')"
+         echo "pull request number is $PULL_REQUEST_NUMBER"
+         echo "___________________"
+         
+         #syntax git tag <tag> <commitid>
+         git tag release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT} ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
+         git push origin release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}
+         #git tag release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}} ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
+         #git push origin release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
