@@ -1,5 +1,6 @@
 name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease
 run-name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease
+#author martin francis kallukalam
 on:
    pull_request:
     branches: [artifacts]
@@ -81,5 +82,6 @@ jobs:
         run: |
          echo "pr number is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}"
          echo "shortcommit is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}"
-         git tag release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
+         #syntax git tag <tag> <commitid>
+         git tag release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}} ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
          git push origin release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
