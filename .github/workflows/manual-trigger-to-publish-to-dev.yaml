@@ -22,7 +22,7 @@ on:
       default: "last commit"
 env:
   APIOPS_REPO: 'martin2176/apiops'
-  REFTOCHECKOUTFOR_ARTIFACTS: ${{ inputs.REFTOCHECKOUTFOR_ARTIFACTS == 'last commit' && 'inputs.BRANCH_TO_DEPLOY_FROM' || 'inputs.REFTOCHECKOUTFOR_ARTIFACTS' }}
+  #REFTOCHECKOUTFOR_ARTIFACTS: ${{ inputs.REFTOCHECKOUTFOR_ARTIFACTS == 'last commit' && 'inputs.BRANCH_TO_DEPLOY_FROM' || 'inputs.REFTOCHECKOUTFOR_ARTIFACTS' }}
   
   
 jobs:
