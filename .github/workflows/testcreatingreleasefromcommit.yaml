@@ -84,18 +84,13 @@ jobs:
         env:
          GH_TOKEN: ${{ secrets.ghpattoken }}
         run: |
-         echo "___________________"
          COMMITID="${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
-         echo "commit id is ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
          echo "commitid is ${COMMITID}"
          COMMITID_SHORT="$(echo ${COMMITID} | cut -c1-7)"
          echo "commitidshort is $COMMITID_SHORT"
          PULL_REQUEST_NUMBER="$(gh pr list --search "${COMMITID}" --state merged --json url --jq ".[0].url"  | awk -F'/' '{print $NF}')"
          echo "pull request number is $PULL_REQUEST_NUMBER"
-         echo "___________________"
          
          #syntax git tag <tag> <commitid>
-         #git tag release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT} ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
-         #git push origin release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}
-         #git tag release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}} ${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}
-         #git push origin release-PR-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID_SHORT}}
+         git tag "release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}" "${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
+         git push origin "release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}"
