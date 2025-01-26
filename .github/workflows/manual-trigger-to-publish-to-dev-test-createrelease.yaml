@@ -87,4 +87,31 @@ jobs:
       BRANCH_TO_DEPLOY_FROM: artifacts
      secrets: inherit
 
-
+    Create-Production-Ready-Release:
+     name: Create-Production-Ready-Release
+     needs: [Set-CommitID-to-Extract-Artifacts,Print-User-Selections,Deploy-to-Dev-APIM-Instance,Deploy-to-Test-APIM-Instance]
+     runs-on: ubuntu-latest
+     steps:
+      - name: checkout-artifacts-branch
+        id: checkout-artifacts-branch
+        uses: actions/checkout@v4
+        with:
+         ref: 'artifacts'
+         fetch-tags: 'true'
+         fetch-depth: 0
+         token: ${{ secrets.ghpattoken }}         
+      - name: create-release-tag
+        id: create-release-tag
+        env:
+         GH_TOKEN: ${{ secrets.ghpattoken }}
+        run: |
+         COMMITID="${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
+         echo "commitid is ${COMMITID}"
+         COMMITID_SHORT="$(echo ${COMMITID} | cut -c1-7)"
+         echo "commitidshort is $COMMITID_SHORT"
+         PULL_REQUEST_NUMBER="$(gh pr list --search "${COMMITID}" --state merged --json url --jq ".[0].url"  | awk -F'/' '{print $NF}')"
+         echo "pull request number is $PULL_REQUEST_NUMBER"
+         
+         #syntax git tag <tag> <commitid>
+         git tag "release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}" "${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
+         git push origin "release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}"
