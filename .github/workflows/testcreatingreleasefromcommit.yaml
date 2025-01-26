@@ -1,5 +1,5 @@
-name: Manual-Trigger-To-Publish-to-Dev-Test-CreateRelease
-run-name: Manual-Trigger-To-Publish-to-Dev-Test-CreateRelease
+name: TESTCREATERELEASEFROMCOMMIT
+run-name: TESTCREATERELEASEFROMCOMMIT
 on:
    workflow_dispatch:
     inputs:
