@@ -1,5 +1,5 @@
-name: Extract-From-Dev-APIM-Instance-V2.1
-run-name: Extract-From-Dev-APIM-Instance-V2.1
+name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance
+run-name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance
 #martin f k
 on:
   workflow_dispatch:
@@ -57,11 +57,9 @@ jobs:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_RESOURCE_GROUP_NAME: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
-          #API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts  # change this to the artifacts folder
           API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ runner.temp }}/apimartifacts
           API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }}
           #Logging__LogLevel__Default: Trace
-          #CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/configuration-extractor.yaml
         run: |
           $var1="${{ github.event.inputs.EXTRACTOR_OPTION }}"
           $var2="Extract All APIM Artifacts"
