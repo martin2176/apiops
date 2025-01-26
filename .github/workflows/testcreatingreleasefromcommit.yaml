@@ -81,6 +81,8 @@ jobs:
          token: ${{ secrets.ghpattoken }}         
       - name: create-release-tag
         id: create-release-tag
+        env:
+         GH_TOKEN: ${{ secrets.ghpattoken }}
         run: |
          echo "___________________"
          COMMITID="${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
