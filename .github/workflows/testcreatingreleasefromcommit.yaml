@@ -33,6 +33,11 @@ jobs:
          ref: 'artifacts'
          fetch-tags: 'false'
          fetch-depth: 1
+      - name: printreftocheckoutartificats
+        run: |
+         echo "________"
+         echo ${{ env.REFTOCHECKOUTFOR_ARTIFACTS }}
+         echo "________"
       - name: set-commitid-on-manual-run-to-last-commit
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.REFTOCHECKOUTFOR_ARTIFACTS == 'artifacts' }}
         id: set-commitid-on-manual-run-to-last-commit
