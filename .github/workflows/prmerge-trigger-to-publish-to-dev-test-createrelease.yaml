@@ -5,6 +5,7 @@ on:
    pull_request:
     branches: [artifacts]
     types: [closed]
+    paths: [apimartifacts]
   
 jobs:
     Set-CommitID-to-Extract-Artifacts:
