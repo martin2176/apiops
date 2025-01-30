@@ -1,7 +1,0 @@
-{
-  "properties": {
-    "displayName": "tremble-clientsecret",
-    "secret": true,
-    "tags": []
-  }
-}
