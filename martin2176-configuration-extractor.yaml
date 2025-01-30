@@ -1,5 +1,6 @@
 apiNames:
   - martin-petstore
+  - brianspetstore
 backendNames:
   - none
 diagnosticNames:
