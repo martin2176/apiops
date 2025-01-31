@@ -88,6 +88,7 @@ jobs:
      secrets: inherit
 
     Create-Production-Ready-Release:
+     environment: test
      name: Create-Production-Ready-Release
      needs: [Set-CommitID-to-Extract-Artifacts,Print-User-Selections,Deploy-to-Dev-APIM-Instance,Deploy-to-Test-APIM-Instance]
      runs-on: ubuntu-latest
