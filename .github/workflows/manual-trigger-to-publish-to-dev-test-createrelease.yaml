@@ -111,7 +111,12 @@ jobs:
          echo "commitidshort is $COMMITID_SHORT"
          PULL_REQUEST_NUMBER="$(gh pr list --search "${COMMITID}" --state merged --json url --jq ".[0].url"  | awk -F'/' '{print $NF}')"
          echo "pull request number is $PULL_REQUEST_NUMBER"
-         
+         tag="release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}"
+         if [ $(git tag -l "$version") ]; then
+          echo "Tag:${tag} already exist in repo.Skipping creating tag."
+         else
+          echo "Tag:${tag} does not exist in repo.Creating tag."
          #syntax git tag <tag> <commitid>
-         git tag "release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}" "${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
-         git push origin "release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}"
+          git tag "release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}" "${{ needs.Set-CommitID-to-Extract-Artifacts.outputs.COMMITID }}"
+          git push origin "release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}"
+         fi
