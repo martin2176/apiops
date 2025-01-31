@@ -113,7 +113,7 @@ jobs:
          PULL_REQUEST_NUMBER="$(gh pr list --search "${COMMITID}" --state merged --json url --jq ".[0].url"  | awk -F'/' '{print $NF}')"
          echo "pull request number is $PULL_REQUEST_NUMBER"
          tag="release-PR-${PULL_REQUEST_NUMBER}-SHA-${COMMITID_SHORT}"
-         if [ $(git tag -l "$version") ]; then
+         if [ $(git tag -l "$tag") ]; then
           echo "Tag:${tag} already exist in repo.Skipping creating tag."
          else
           echo "Tag:${tag} does not exist in repo.Creating tag."
