@@ -39,11 +39,6 @@ jobs:
          echo "commitid is $COMMITID"
          echo "COMMITID=${COMMITID}" >> "$GITHUB_OUTPUT"
          echo "PUBLISH_ARTIFACTS_CHOICE=${{ env.PUBLISH_ARTIFACTS_CHOICE }}" >> "$GITHUB_OUTPUT"
-      - name: step-failed-to-get-commitid
-        id: step-failed-to-get-commitid
-        if: ${{ failure() && steps.get-commitid-from-tag.conclusion == 'failure' }}
-        run: |
-         echo "Step failed to get commitid from tag"     
      outputs:
       COMMITID: ${{ steps.get-commitid-from-tag.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.get-commitid-from-tag.outputs.PUBLISH_ARTIFACTS_CHOICE }}
@@ -59,3 +54,16 @@ jobs:
          echo "ref to checkout artifacts(commitid): ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID}}"
          echo "publish artifacts choice: ${{ env.PUBLISH_ARTIFACTS_CHOICE}}"
          echo "branch to deploy artifacts from: ${{ env.BRANCH_TO_DEPLOY_FROM }}"
+
+    Deploy-to-Prod-APIM-Instance:
+     name: Deploy-to-Prod-APIM-Instance
+     needs: [Set-CommitID-to-Publish-Artifacts,Print-User-Selections]
+     uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
+     with:
+      COMMITID: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID }}
+      PUBLISH_ARTIFACTS_CHOICE: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE }}
+      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
+      CONFIGURATION_YAML_PATH: configuration-publisher-prod.yaml
+      API_MANAGEMENT_ENVIRONMENT: prod
+      BRANCH_TO_DEPLOY_FROM: artifacts
+     secrets: inherit         
