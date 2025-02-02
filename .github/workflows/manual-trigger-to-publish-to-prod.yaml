@@ -32,7 +32,7 @@ jobs:
           echo "Tag:${tag} exists in repo.Proceeding."
          else
           echo "Tag:${tag} does not exist in repo.Exiting."
-          echo "Tag does not exist in repo. Hence cannot continue" > $GITHUB_STEP_SUMMARY
+          echo "Tag does not exist in repo. Hence cannot continue :thumbsdown:" > $GITHUB_STEP_SUMMARY
           exit 1
          fi
          COMMITID="$(git rev-list -n 1 $tag)"
