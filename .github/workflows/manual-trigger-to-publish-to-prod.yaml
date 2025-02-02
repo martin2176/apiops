@@ -32,12 +32,17 @@ jobs:
           echo "Tag:${tag} exists in repo.Proceeding."
          else
           echo "Tag:${tag} does not exist in repo.Exiting."
-          exit
+          exit 1
          fi
          COMMITID="$(git rev-list -n 1 $tag)"
          echo "commitid is $COMMITID"
          echo "COMMITID=${COMMITID}" >> "$GITHUB_OUTPUT"
-         echo "PUBLISH_ARTIFACTS_CHOICE=${{ env.PUBLISH_ARTIFACTS_CHOICE }}" >> "$GITHUB_OUTPUT"         
+         echo "PUBLISH_ARTIFACTS_CHOICE=${{ env.PUBLISH_ARTIFACTS_CHOICE }}" >> "$GITHUB_OUTPUT"
+      - name: step-failed-to-get-commitid
+        id: step-failed-to-get-commitid
+        if: ${{ failure() && steps.get-commitid-from-tag.conclusion == 'failure' }}
+        run: |
+         echo "Step failed to get commitid from tag"     
      outputs:
       COMMITID: ${{ steps.get-commitid-from-tag.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.get-commitid-from-tag.outputs.PUBLISH_ARTIFACTS_CHOICE }}
