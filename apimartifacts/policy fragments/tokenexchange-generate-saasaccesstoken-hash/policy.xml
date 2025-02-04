@@ -1,8 +1,0 @@
-<fragment>
-	<set-variable name="access_token_hash" value="@{
-		System.Security.Cryptography.HMACSHA256 hasher = new System.Security.Cryptography.HMACSHA256(System.Text.Encoding.UTF8.GetBytes("foobar"));
-        
-        return System.Net.WebUtility.UrlEncode((string)Convert.ToBase64String(hasher.ComputeHash(System.Text.Encoding.UTF8.GetBytes((string)context.Variables["access_token"]))));
-        }" />
-	<!-- this was the original return statement. this will return token in base64 (not urlencoded) return Convert.ToBase64String(hasher.ComputeHash(System.Text.Encoding.UTF8.GetBytes((string)context.Variables["access_token"]))); -->
-</fragment>
