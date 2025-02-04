@@ -1,6 +1,6 @@
 {
   "properties": {
-    "path": "petstore1",
+    "path": "martin-petstore",
     "apiRevision": "1",
     "authenticationSettings": {},
     "contact": {
@@ -16,7 +16,6 @@
     "protocols": [
       "https"
     ],
-    "serviceUrl": "https://petstore3.swagger.io/api/v3",
     "subscriptionKeyParameterNames": {
       "header": "Ocp-Apim-Subscription-Key",
       "query": "subscription-key"
