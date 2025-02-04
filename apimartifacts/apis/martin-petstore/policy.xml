@@ -10,6 +10,7 @@
 		<base />
 		<set-variable name="variable name1" value="123" />
 		foo
+		bar
 	</inbound>
 	<!-- Control if and how the requests are forwarded to services  -->
 	<backend>
