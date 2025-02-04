@@ -16,6 +16,7 @@
     "protocols": [
       "https"
     ],
+    "serviceUrl": "https://feiaz-apim-dev.azure-api.net/martin-petstore",
     "subscriptionKeyParameterNames": {
       "header": "Ocp-Apim-Subscription-Key",
       "query": "subscription-key"
