@@ -1,9 +1,10 @@
 name: Commit-Trigger-To-Publish-to-Dev
 run-name: Commit-Trigger-To-Publish-to-Dev
 #author martin francis kallukalam
+#publish to dev apim instance from developer branch when a push/commit event happens on developer branch
 on:
    push:
-    branches: [brian1]
+    branches: [brian]
     paths: 
      - 'apimartifacts/**'
 env:
@@ -17,26 +18,15 @@ jobs:
      name: Set-CommitID-to-Publish-Artifacts
      runs-on: ubuntu-latest
      steps:
-      - name: checkout-developer-branch
-        id: checkout-developer-branch
-        uses: actions/checkout@v4
-        with:
-         ref: '${{ env.BRANCH_TO_DEPLOY_FROM }}'
-         fetch-tags: 'false'
-         fetch-depth: 15
-      - name: set-commitid-on-manual-run-to-last-commit
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.REFTOCHECKOUTFOR_ARTIFACTS == 'last commit' }}
-        id: set-commitid-on-manual-run-to-last-commit
-        run: echo "COMMITID=$(git rev-parse HEAD)" >> $GITHUB_ENV
-      - name: set-commitid-on-manual-run-to-specific-commit
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.REFTOCHECKOUTFOR_ARTIFACTS != 'last commit' }}
-        id: set-commitid-on-manual-run-to-specific-commit
-        run: echo "COMMITID=${{ inputs.REFTOCHECKOUTFOR_ARTIFACTS }}" >> $GITHUB_ENV
+      - name: printbranchname
+        run: echo "${{ env.BRANCH_TO_DEPLOY_FROM }}"
       - name: set-commitid
         id: set-commitid
         run: |
-         echo "COMMITID=${COMMITID}" >> "$GITHUB_OUTPUT"
-         echo "PUBLISH_ARTIFACTS_CHOICE=${{ inputs.PUBLISH_ARTIFACTS_CHOICE }}" >> "$GITHUB_OUTPUT"
+         echo "COMMITID=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+         echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-last-commit" >> "$GITHUB_OUTPUT"
+         #echo "COMMITID_SHORT=$(git rev-parse --short ${GITHUB_SHA})" >> "$GITHUB_OUTPUT"
+         #echo "COMMITID_SHORT=$(echo ${GITHUB_SHA} | cut -c1-7)" >> "$GITHUB_OUTPUT"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
@@ -51,8 +41,9 @@ jobs:
         run: |
          echo "ref to checkout artifacts(commitid): ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID}}"
          echo "publish artifacts choice: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE}}"
-
+         echo "branch to publish artifacts from: ${{ env.BRANCH_TO_DEPLOY_FROM }}"
     Deploy-to-Dev-APIM-Instance:
+     if: ${{ !always() }}
      name: Deploy-to-Dev-APIM-Instance
      needs: Set-CommitID-to-Publish-Artifacts
      uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
@@ -62,5 +53,5 @@ jobs:
       API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
       CONFIGURATION_YAML_PATH: configuration-publisher-dev.yaml
       API_MANAGEMENT_ENVIRONMENT: dev
-      BRANCH_TO_DEPLOY_FROM: ${{ inputs.BRANCH_TO_DEPLOY_FROM }}      
+      BRANCH_TO_DEPLOY_FROM: ${{ env.BRANCH_TO_DEPLOY_FROM }}  
      secrets: inherit
