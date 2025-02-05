@@ -1,5 +1,5 @@
 #Reusable workflow
-name: Publish-Artifacts-to-APIM-Environment
+name: Publish-Artifacts-to-APIM-Environment-OLD-V1
 run-name: Publish-Artifacts-to-APIM-Environment
 #Author martin francis kallukalam
 on:
@@ -31,7 +31,6 @@ env:
   apiops_release_version: v6.0.1.3
   Logging__LogLevel__Default: ${{ vars.LOG_LEVEL }}
   COMMITID: ${{ inputs.COMMITID }}
-  DEBUG_STEPS: ${{ true }}
   
 jobs:
     Get-Configuration-Override-File:
@@ -97,17 +96,12 @@ jobs:
         with:
          ref: '${{ inputs.BRANCH_TO_DEPLOY_FROM }}'
          fetch-tags: 'true'
-         fetch-depth: 50
-      - name: List-Top-Level-Contents-Of-Artifacts-Folder
-        id: list-top-level-contents-of-artifacts-folder
-        if ${{ env.DEBUG_STEPS}} == true
+         fetch-depth: 15
+      - name: List-Artifacts-Files
+        id: list-artifact-files
         run: |
-         echo "Listing the top level artifact directories"
+         echo "Listing the top level artifact files and directories"
          ls -al ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
-      - name: List-Artifacts-Files-Captured-In-the-Commit
-        id: list-artifact-files-changes-captured-in-the-commit
-        if ${{ env.DEBUG_STEPS}} == true
-        run: git diff --compact-summary
       - name: Run-Publisher
         id: run-publisher
         shell: pwsh
