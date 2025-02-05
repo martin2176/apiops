@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: martin-petstore1
-  description: "version2"
+  description: "version3"
   termsOfService: http://swagger.io/terms/
   contact:
     email: apiteam@swagger.io
