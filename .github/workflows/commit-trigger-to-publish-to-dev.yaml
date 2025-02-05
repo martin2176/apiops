@@ -6,6 +6,11 @@ on:
    push:
     branches:
     - '!artifacts'
+    - '!working'
+    - '!main'
+    - '!dev'
+    - '!test'
+    - '!prod'
     paths: 
      - 'apimartifacts/**'
 env:
