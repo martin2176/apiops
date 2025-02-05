@@ -31,7 +31,7 @@ env:
   apiops_release_version: v6.0.1.3
   Logging__LogLevel__Default: ${{ vars.LOG_LEVEL }}
   COMMITID: ${{ inputs.COMMITID }}
-  DEBUG_STEPS: ${{ true }}
+  DEBUG_STEPS: 'true'
   
 jobs:
     Get-Configuration-Override-File:
@@ -100,13 +100,13 @@ jobs:
          fetch-depth: 50
       - name: List-Top-Level-Contents-Of-Artifacts-Folder
         id: list-top-level-contents-of-artifacts-folder
-        if ${{ env.DEBUG_STEPS}} == true
+        if ${{ env.DEBUG_STEPS}} == 'true'
         run: |
          echo "Listing the top level artifact directories"
          ls -al ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
       - name: List-Artifacts-Files-Captured-In-the-Commit
         id: list-artifact-files-changes-captured-in-the-commit
-        if ${{ env.DEBUG_STEPS}} == true
+        if ${{ env.DEBUG_STEPS}} == 'true'
         run: git diff --compact-summary
       - name: Run-Publisher
         id: run-publisher
