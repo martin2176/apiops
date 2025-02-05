@@ -106,7 +106,7 @@ jobs:
          ls -al ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
       - name: List-Artifacts-Files-Captured-In-the-Commit
         id: list-artifact-files-changes-captured-in-the-commit
-        
+        if ${{ env.DEBUG_STEPS }} == 'true'
         run: git diff --compact-summary
       - name: Run-Publisher
         id: run-publisher
