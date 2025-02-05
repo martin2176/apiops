@@ -9,6 +9,7 @@
 	<inbound>
 		<base />
 		<set-variable name="version1" value="12345784" />
+		<set-variable name="version2" value="12345784" />
 
 
 		
