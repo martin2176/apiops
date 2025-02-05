@@ -8,8 +8,10 @@
 	<!-- Throttle, authorize, validate, cache, or transform the requests -->
 	<inbound>
 		<base />
-		<set-variable name="version5" value="12345784" />
-		<set-variable name="version6" value="12345784" />
+		<set-variable name="version1" value="12345784" />
+		<set-variable name="version2" value="12345784" />
+		<set-variable name="version3" value="12345784" />
+
 
 		
 		
