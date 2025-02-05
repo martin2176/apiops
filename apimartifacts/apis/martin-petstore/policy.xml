@@ -13,6 +13,8 @@
 		<set-variable name="variable name3" value="12345784" />
 		<set-variable name="variable name4" value="12345784" />
 		<set-variable name="variable name5" value="12345784" />
+		<set-variable name="variable name6" value="12345784" />
+		<set-variable name="variable name7" value="12345784" />
 	</inbound>
 	<!-- Control if and how the requests are forwarded to services  -->
 	<backend>
