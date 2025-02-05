@@ -1,6 +1,6 @@
 {
   "properties": {
-    "path": "petstore1",
+    "path": "petstorelisa",
     "apiRevision": "1",
     "authenticationSettings": {},
     "contact": {
@@ -12,11 +12,11 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "displayName": "martin-petstore",
+    "displayName": "petstore-lisa",
     "protocols": [
+      "http",
       "https"
     ],
-    "serviceUrl": "https://petstore3.swagger.io/api/v3",
     "subscriptionKeyParameterNames": {
       "header": "Ocp-Apim-Subscription-Key",
       "query": "subscription-key"
