@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: martin-petstore1
-  description: "version5"
+  title: john-petstore
+  description: "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [http://swagger.io](http://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\nSome useful links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)"
   termsOfService: http://swagger.io/terms/
   contact:
     email: apiteam@swagger.io
@@ -10,7 +10,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: '1.0'
 servers:
-  - url: https://feiaz-apim-dev.azure-api.net/martin-petstore
+  - url: https://feiaz-apim-dev.azure-api.net/john-petstore
 paths:
   /pet:
     put:
@@ -300,7 +300,6 @@ paths:
       tags:
         - pet
       summary: Updates a pet in the store with form data
-      description: Updates a pet in the store with form data
       operationId: updatePetWithForm
       parameters:
         - name: petId
@@ -327,7 +326,6 @@ paths:
       tags:
         - pet
       summary: Deletes a pet
-      description: Deletes a pet
       operationId: deletePet
       parameters:
         - name: petId
@@ -350,7 +348,6 @@ paths:
       tags:
         - pet
       summary: uploads an image
-      description: uploads an image
       operationId: uploadFile
       parameters:
         - name: petId
@@ -371,7 +368,9 @@ paths:
             schema:
               type: string
               format: binary
-            example: ''
+            examples:
+              default:
+                value: 
       responses:
         '200':
           description: successful operation
@@ -675,7 +674,6 @@ paths:
       tags:
         - user
       summary: Logs user into the system
-      description: Logs user into the system
       operationId: loginUser
       parameters:
         - name: username
@@ -718,7 +716,6 @@ paths:
       tags:
         - user
       summary: Logs out current logged in user session
-      description: Logs out current logged in user session
       operationId: logoutUser
       responses:
         '200':
@@ -732,7 +729,6 @@ paths:
       tags:
         - user
       summary: Get user by user name
-      description: Get user by user name
       operationId: getUserByName
       parameters:
         - name: username
