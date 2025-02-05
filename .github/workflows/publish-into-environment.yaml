@@ -100,13 +100,13 @@ jobs:
          fetch-depth: 50
       - name: List-Top-Level-Contents-Of-Artifacts-Folder
         id: list-top-level-contents-of-artifacts-folder
-        if ${{ env.DEBUG_STEPS }} == 'true'
+        
         run: |
          echo "Listing the top level artifact directories"
          ls -al ${{ GITHUB.WORKSPACE }}/${{ inputs.API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH }}
       - name: List-Artifacts-Files-Captured-In-the-Commit
         id: list-artifact-files-changes-captured-in-the-commit
-        if ${{ env.DEBUG_STEPS }} == 'true'
+        
         run: git diff --compact-summary
       - name: Run-Publisher
         id: run-publisher
