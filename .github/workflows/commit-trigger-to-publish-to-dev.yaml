@@ -4,6 +4,8 @@ run-name: Commit-Trigger-To-Publish-to-Dev
 #publish to dev apim instance from developer branch when a push/commit event happens on developer branch
 on:
    push:
+    branches:
+    - '!artifacts'
     paths: 
      - 'apimartifacts/**'
 env:
@@ -17,8 +19,6 @@ jobs:
      name: Set-CommitID-to-Publish-Artifacts
      runs-on: ubuntu-latest
      steps:
-      - name: printbranchname
-        run: echo "${{ env.BRANCH_TO_DEPLOY_FROM }}"
       - name: set-commitid
         id: set-commitid
         run: |
