@@ -59,7 +59,7 @@ jobs:
      name: Deploy-to-Prod-APIM-Instance
      needs: [Set-CommitID-to-Publish-Artifacts,Print-User-Selections]
      env:
-      BRANCH_TO_DEPLOY_FROM: '${{ env.BRANCH_TO_DEPLOY_FROM }}
+      BRANCH_TO_DEPLOY_FROM: 'artifacts'
      uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
      with:
       COMMITID: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID }}
