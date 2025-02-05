@@ -19,6 +19,7 @@
 		<set-variable name="version1" value="12345784" />
 		<set-variable name="version2" value="12345784" />
 		<set-variable name="version3" value="12345784" />
+		<set-variable name="version4" value="12345784" />
 		
 	</inbound>
 	<!-- Control if and how the requests are forwarded to services  -->
