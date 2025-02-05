@@ -1,0 +1,90 @@
+name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease
+run-name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease
+#author martin francis kallukalam
+on:
+   pull_request:
+    branches: [artifacts]
+    types: [closed]
+    paths: 
+     - 'apimartifacts/**'
+  
+jobs:
+    Set-CommitID-to-Publish-Artifacts:
+     if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) && startsWith(github.head_ref, 'working') }}
+     name: Set-CommitID-to-Publish-Artifacts
+     runs-on: ubuntu-latest
+     steps:
+      - name: set-commitid
+        id: set-commitid
+        run: |
+         echo "COMMITID=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+         echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-last-commit" >> "$GITHUB_OUTPUT"
+         #echo "COMMITID_SHORT=$(git rev-parse --short ${GITHUB_SHA})" >> "$GITHUB_OUTPUT"
+         echo "COMMITID_SHORT=$(echo ${GITHUB_SHA} | cut -c1-7)" >> "$GITHUB_OUTPUT"
+         echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
+     outputs:
+      COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
+      PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
+      COMMITID_SHORT: ${{ steps.set-commitid.outputs.COMMITID_SHORT }}
+      PULL_REQUEST_NUMBER: ${{ steps.set-commitid.outputs.PULL_REQUEST_NUMBER }}
+    Print-User-Selections:
+     name: Print-User-Selections
+     runs-on: ubuntu-latest
+     needs: Set-CommitID-to-Publish-Artifacts
+     steps:
+      - name: print-user-selections
+        id: print-user-selections
+        run: |
+         echo "ref to checkout artifacts(commitid): ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID}}"
+         echo "publish artifacts choice: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE}}"
+         echo "pr number: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_NUMBER}}"
+         echo "commitid short: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID_SHORT}}"
+
+    Deploy-to-Dev-APIM-Instance:
+     name: Deploy-to-Dev-APIM-Instance
+     needs: [Set-CommitID-to-Publish-Artifacts,Print-User-Selections]
+     uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
+     with:
+      COMMITID: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID }}
+      PUBLISH_ARTIFACTS_CHOICE: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE }}
+      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
+      CONFIGURATION_YAML_PATH: configuration-publisher-dev.yaml
+      API_MANAGEMENT_ENVIRONMENT: dev
+      BRANCH_TO_DEPLOY_FROM: artifacts
+     secrets: inherit
+
+    Deploy-to-Test-APIM-Instance:
+     name: Deploy-to-Test-APIM-Instance
+     needs: [Set-CommitID-to-Publish-Artifacts,Print-User-Selections,Deploy-to-Dev-APIM-Instance]
+     uses: martin2176/apiops/.github/workflows/publish-into-environment.yaml@main
+     with:
+      COMMITID: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID }}
+      PUBLISH_ARTIFACTS_CHOICE: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE }}
+      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
+      CONFIGURATION_YAML_PATH: configuration-publisher-test.yaml
+      API_MANAGEMENT_ENVIRONMENT: test
+      BRANCH_TO_DEPLOY_FROM: artifacts
+     secrets: inherit
+
+    Create-Production-Ready-Release:
+     environment: test
+     name: Create-Production-Ready-Release
+     needs: [Set-CommitID-to-Publish-Artifacts,Print-User-Selections,Deploy-to-Dev-APIM-Instance,Deploy-to-Test-APIM-Instance]
+     runs-on: ubuntu-latest
+     steps:
+      - name: checkout-artifacts-branch
+        id: checkout-artifacts-branch
+        uses: actions/checkout@v4
+        with:
+         ref: 'artifacts'
+         fetch-tags: 'true'
+         fetch-depth: 0
+         token: ${{ secrets.ghpattoken }}         
+      - name: create-release-tag
+        id: create-release-tag
+        run: |
+         echo "pr number is ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_NUMBER}}"
+         echo "shortcommit is ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID_SHORT}}"
+         #syntax git tag <tag> <commitid>
+         git tag release-PR-${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID_SHORT}} ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID }}
+         git push origin release-PR-${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_NUMBER}}-SHA-${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID_SHORT}}
