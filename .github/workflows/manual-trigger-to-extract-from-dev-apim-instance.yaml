@@ -36,13 +36,14 @@ env:
   PULL_REQUEST_LABEL: ticket-${{ github.event.inputs.REFERENCE_NUMBER }}
   BASE_BRANCH: dev-artifacts
   HEAD_BRANCH: dev-working
+  ENVIRONMENT: dev
   #artifacts branch dev-artifacts
   #working branch dev-working
 jobs:
   Extract-Artifacts:
     name: Extract-Artifacts
     runs-on: ubuntu-latest
-    environment: dev
+    environment: ${{ env.ENVIRONMENT }}
 
     steps:
       - name: Checkout-Configuration-File
