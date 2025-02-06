@@ -5,7 +5,6 @@ on:
    pull_request:
     branches: [artifacts]
     types: [closed]
-
   
 jobs:
     Set-CommitID-to-Publish-Artifacts:
@@ -29,7 +28,7 @@ jobs:
          echo "label name is ${{ github.event.pull_request.labels.name }}"
          echo "label name is ${{ github.event.pull_request.label.name }}"
          echo "label name is ${{ toJson(github.event.pull_request.labels.*.name) }}"
-         echo "label name is ${{ toJson(github.event.pull_request.labels[0].name }}"
+
          echo "hello"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
