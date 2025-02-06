@@ -24,8 +24,9 @@ jobs:
          #echo "COMMITID_SHORT=$(git rev-parse --short ${GITHUB_SHA})" >> "$GITHUB_OUTPUT"
          echo "COMMITID_SHORT=$(echo ${GITHUB_SHA} | cut -c1-7)" >> "$GITHUB_OUTPUT"
          echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
-         echo "PULL_REQUEST_LABEL=${{ github.event.label.name }}" >> "$GITHUB_OUTPUT"
+         echo "PULL_REQUEST_LABEL=${{ github.event.labels.name }}" >> "$GITHUB_OUTPUT"
          echo "$GITHUB_EVENT"
+         echo "label name is ${{ github.event.labels.name }}"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
