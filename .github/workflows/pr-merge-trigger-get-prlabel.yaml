@@ -23,7 +23,7 @@ jobs:
          #echo "COMMITID_SHORT=$(git rev-parse --short ${GITHUB_SHA})" >> "$GITHUB_OUTPUT"
          echo "COMMITID_SHORT=$(echo ${GITHUB_SHA} | cut -c1-7)" >> "$GITHUB_OUTPUT"
          echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
-         echo "PULL_REQUEST_LABEL=${{ github.event.pull_request.labels.name }}" >> "$GITHUB_OUTPUT"
+         echo "PULL_REQUEST_LABEL=${{ toJson(github.event.pull_request.labels[0].name) }}" >> "$GITHUB_OUTPUT"
          echo "$GITHUB_EVENT"
          echo "label name is ${{ github.event.pull_request.labels.name }}"
          echo "label name is ${{ github.event.pull_request.label.name }}"
