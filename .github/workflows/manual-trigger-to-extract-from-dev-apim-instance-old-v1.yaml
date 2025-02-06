@@ -1,5 +1,5 @@
-name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance
-run-name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance
+name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance-OLD-V1
+run-name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance-OLD-V1
 #martin f k
 on:
   workflow_dispatch:
