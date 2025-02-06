@@ -30,15 +30,14 @@ on:
 concurrency:
  group: extract-from-dev-apim-instance
  cancel-in-progress: false
-#artifacts branch dev-artifacts
-#working branch dev-working
-
 env:
   apiops_release_version: v6.0.1.4
   REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH: dev
   PULL_REQUEST_LABEL: ticket-${{ github.event.inputs.REFERENCE_NUMBER }}
   BASE_BRANCH: dev-artifacts
   HEAD_BRANCH: dev-working
+  #artifacts branch dev-artifacts
+  #working branch dev-working
 jobs:
   Extract-Artifacts:
     name: Extract-Artifacts
