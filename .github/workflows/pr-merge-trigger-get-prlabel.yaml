@@ -17,7 +17,7 @@ jobs:
       - name: set-commitid
         id: set-commitid
         env:
-         GITHUB_EVENT: ${{ toJson(github.event) }}
+         GITHUB_EVENT: ${{ toJson(github.event.pull_request) }}
         run: |
          echo "COMMITID=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
          echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-last-commit" >> "$GITHUB_OUTPUT"
@@ -27,6 +27,9 @@ jobs:
          echo "PULL_REQUEST_LABEL=${{ github.event.pull_request.labels.name }}" >> "$GITHUB_OUTPUT"
          echo "$GITHUB_EVENT"
          echo "label name is ${{ github.event.pull_request.labels.name }}"
+         echo "label name is ${{ github.event.pull_request.label.name }}"
+         echo "label name is ${{ toJson(github.event.pull_request.labels.*.name) }}"
+         echo "hello"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
