@@ -48,4 +48,5 @@ jobs:
          echo "publish artifacts choice: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE }}"
          echo "pr number: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_NUMBER }}"
          echo "commitid short: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID_SHORT }}"
+         echo "${{ toJson(github.event.pull_request.labels[0].name) }}"
          echo "pr label: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_LABEL }}"
