@@ -29,6 +29,7 @@ jobs:
          echo "label name is ${{ github.event.pull_request.labels.name }}"
          echo "label name is ${{ github.event.pull_request.label.name }}"
          echo "label name is ${{ toJson(github.event.pull_request.labels.*.name) }}"
+         echo "label name is ${{ github.event.pull_request.labels.*.name }}"
          echo "hello"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
