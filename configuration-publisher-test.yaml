@@ -6,7 +6,7 @@ namedValues:
   - name: environment
     properties:
       displayName: environment
-      value: "development"
+      value: "development1"
 apis:
  - name: test
    properties:
