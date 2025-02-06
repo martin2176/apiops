@@ -28,7 +28,7 @@ jobs:
          echo "label name is ${{ github.event.pull_request.labels.name }}"
          echo "label name is ${{ github.event.pull_request.label.name }}"
          echo "label name is ${{ toJson(github.event.pull_request.labels.*.name) }}"
-
+         echo "label name is ${{ toJson(github.event.pull_request.labels[0].name }}"
          echo "hello"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
@@ -49,16 +49,3 @@ jobs:
          echo "pr number: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_NUMBER }}"
          echo "commitid short: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID_SHORT }}"
          echo "pr label: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_LABEL }}"
-
-
-    "labels": [
-      {
-        "color": "A37F07",
-        "default": false,
-        "description": "",
-        "id": 8110223291,
-        "name": "jira001",
-        "node_id": "LA_kwDOM_OLDM8AAAAB42gvuw",
-        "url": "https://api.github.com/repos/martin2176/apiops/labels/jira001"
-      }
-    ],
