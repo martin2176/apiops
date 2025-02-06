@@ -5,24 +5,28 @@ on:
    pull_request:
     branches: [artifacts]
     types: [closed]
-    paths: 
-     - 'apimartifacts/**'
+
   
 jobs:
     Set-CommitID-to-Publish-Artifacts:
-     if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) && startsWith(github.head_ref, 'brian') }}
+     #if:  ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) && startsWith(github.head_ref, 'brian') }}
+     if:  ${{ (github.event_name == 'pull_request') && startsWith(github.head_ref, 'brian') }}
      name: Set-CommitID-to-Publish-Artifacts
      runs-on: ubuntu-latest
      steps:
       - name: set-commitid
         id: set-commitid
+        env:
+         GITHUB_EVENT: ${{ toJson(github.event) }}
         run: |
          echo "COMMITID=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
          echo "PUBLISH_ARTIFACTS_CHOICE=publish-delta-artifacts-in-last-commit" >> "$GITHUB_OUTPUT"
          #echo "COMMITID_SHORT=$(git rev-parse --short ${GITHUB_SHA})" >> "$GITHUB_OUTPUT"
          echo "COMMITID_SHORT=$(echo ${GITHUB_SHA} | cut -c1-7)" >> "$GITHUB_OUTPUT"
          echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
-         echo "PULL_REQUEST_LABEL=${{ github.event.label.name }}" >> "$GITHUB_OUTPUT"
+         echo "PULL_REQUEST_LABEL=${{ github.event.pull_request.labels.name }}" >> "$GITHUB_OUTPUT"
+         echo "$GITHUB_EVENT"
+         echo "label name is ${{ github.event.pull_request.labels.name }}"
      outputs:
       COMMITID: ${{ steps.set-commitid.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.set-commitid.outputs.PUBLISH_ARTIFACTS_CHOICE }}
@@ -37,8 +41,8 @@ jobs:
       - name: print-user-selections
         id: print-user-selections
         run: |
-         echo "ref to checkout artifacts(commitid): ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID}}"
-         echo "publish artifacts choice: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE}}"
-         echo "pr number: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_NUMBER}}"
-         echo "commitid short: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID_SHORT}}"
-         echo "pr label: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_LABEL}}"
+         echo "ref to checkout artifacts(commitid): ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID }}"
+         echo "publish artifacts choice: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PUBLISH_ARTIFACTS_CHOICE }}"
+         echo "pr number: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_NUMBER }}"
+         echo "commitid short: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.COMMITID_SHORT }}"
+         echo "pr label: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.PULL_REQUEST_LABEL }}"
