@@ -10,8 +10,8 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: '1.0'
 servers:
-  - url: http://feiaz-apim-dev.azure-api.net
-  - url: https://feiaz-apim-dev.azure-api.net
+  - url: http://feiaz-apim-dev.azure-api.net/api3
+  - url: https://feiaz-apim-dev.azure-api.net/api3
 paths:
   /pet:
     put:
