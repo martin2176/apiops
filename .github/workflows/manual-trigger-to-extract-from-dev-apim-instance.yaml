@@ -128,7 +128,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Running extractor failed."}
 
           Write-Information "Execution complete."
-          ls -R $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH
+          ls -R $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH || true
         shell: pwsh
       
       - name: Upload-Artifact
