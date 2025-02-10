@@ -1,5 +1,6 @@
 apiNames:
-  - petstore-lisa
+  - api1
+  - api2
 backendNames:
   - none
 diagnosticNames:
