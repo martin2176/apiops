@@ -1,6 +1,6 @@
 apiNames:
   - api1
-  - api2
+
 backendNames:
   - none
 diagnosticNames:
