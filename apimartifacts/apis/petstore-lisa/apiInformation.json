@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "path": "petstorelisa",
+    "apiRevision": "1",
+    "authenticationSettings": {},
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "description": "description1",
+    "isCurrent": true,
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "displayName": "api1",
+    "protocols": [
+      "http",
+      "https"
+    ],
+    "serviceUrl": "https://feiaz-apim-dev.azure-api.net/petstorelisa",
+    "subscriptionKeyParameterNames": {
+      "header": "Ocp-Apim-Subscription-Key",
+      "query": "subscription-key"
+    },
+    "subscriptionRequired": true,
+    "termsOfServiceUrl": "http://swagger.io/terms/"
+  }
+}
