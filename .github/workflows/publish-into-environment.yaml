@@ -107,7 +107,7 @@ jobs:
       - name: List-Artifacts-Files-Captured-In-the-Commit
         id: list-artifact-files-changes-captured-in-the-commit
         if: ${{ env.DEBUG_STEPS }} == 'true'
-        run: git diff --compact-summary
+        run: git diff --compact-summary ${COMMITID}^ ${COMMITID}
       - name: Run-Publisher
         id: run-publisher
         shell: pwsh
