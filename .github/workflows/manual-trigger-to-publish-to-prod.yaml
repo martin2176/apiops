@@ -39,10 +39,11 @@ jobs:
          echo "commitid is $COMMITID"
          echo "COMMITID=${COMMITID}" >> "$GITHUB_OUTPUT"
          echo "PUBLISH_ARTIFACTS_CHOICE=${{ env.PUBLISH_ARTIFACTS_CHOICE }}" >> "$GITHUB_OUTPUT"
+         echo "BRANCH_TO_DEPLOY_FROM=${{ env.BRANCH_TO_DEPLOY_FROM }}" >> $GITHUB_OUTPUT
      outputs:
       COMMITID: ${{ steps.get-commitid-from-tag.outputs.COMMITID }}
       PUBLISH_ARTIFACTS_CHOICE: ${{ steps.get-commitid-from-tag.outputs.PUBLISH_ARTIFACTS_CHOICE }}
-    
+      BRANCH_TO_DEPLOY_FROM: ${{ steps.get-commitid-from-tag.outputs.BRANCH_TO_DEPLOY_FROM }}
     Print-User-Selections:
      name: Print-User-Selections
      runs-on: ubuntu-latest
@@ -65,5 +66,5 @@ jobs:
       API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
       CONFIGURATION_YAML_PATH: configuration-publisher-prod.yaml
       API_MANAGEMENT_ENVIRONMENT: prod
-      BRANCH_TO_DEPLOY_FROM: ${{ env.BRANCH_TO_DEPLOY_FROM }}
+      BRANCH_TO_DEPLOY_FROM: ${{ needs.Set-CommitID-to-Publish-Artifacts.outputs.BRANCH_TO_DEPLOY_FROM }}
      secrets: inherit         
