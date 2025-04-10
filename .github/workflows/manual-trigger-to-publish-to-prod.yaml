@@ -8,7 +8,7 @@ on:
       required: true
 env:
   APIOPS_REPO: 'martin2176/apiops'
-  BRANCH_TO_DEPLOY_FROM: 'artifacts'
+  BRANCH_TO_DEPLOY_FROM: 'dev-artifacts'
   PUBLISH_ARTIFACTS_CHOICE: 'publish-delta-artifacts-in-specific-commit'
   
 jobs:
@@ -65,5 +65,5 @@ jobs:
       API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts
       CONFIGURATION_YAML_PATH: configuration-publisher-prod.yaml
       API_MANAGEMENT_ENVIRONMENT: prod
-      BRANCH_TO_DEPLOY_FROM: artifacts
+      BRANCH_TO_DEPLOY_FROM: ${{ env.BRANCH_TO_DEPLOY_FROM }}
      secrets: inherit         
