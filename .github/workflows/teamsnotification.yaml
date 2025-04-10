@@ -1,0 +1,16 @@
+name: teams-notification1
+run-name: teams-notification1
+on:
+   workflow_dispatch:
+jobs:
+    Notify-TeamsChannel:
+     name: Notify-TeamsChannel
+     runs-on: ubuntu-latest
+     steps:
+      - name: MS Teams Action
+        uses: FTsbrown/msteams-action@v1.0.1
+        with:
+         TITLE: 'Title'
+         BODY: 'Body'
+         MS_TEAMS_WEBHOOK: https://mydigitalspace.webhook.office.com/webhookb2/19838474-ec1f-4fff-a7bb-4f4bccf3ba98@3c2f8435-994c-4552-8fe8-2aec2d0822e4/IncomingWebhook/f5d25fef8e484275ae483f0aae3fa92c/d9490dad-aa85-4c35-b4b0-48b407cf9309/V286l-wLpTcDF4anEWoXMGIbXljfy_A25YvTGf5J-pD7w1
+          
