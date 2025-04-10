@@ -95,7 +95,8 @@ jobs:
         id: checkout-artifacts-branch
         uses: actions/checkout@v4
         with:
-         ref: '${{ inputs.BRANCH_TO_DEPLOY_FROM }}'
+         #ref: '${{ inputs.BRANCH_TO_DEPLOY_FROM }}'
+         ref: '${{ inputs.COMMITID }}'
          fetch-tags: 'true'
          fetch-depth: 50
       - name: List-Top-Level-Contents-Of-Artifacts-Folder
