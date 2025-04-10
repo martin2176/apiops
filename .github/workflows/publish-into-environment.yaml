@@ -95,8 +95,8 @@ jobs:
         id: checkout-artifacts-branch
         uses: actions/checkout@v4
         with:
-         #ref: '${{ inputs.BRANCH_TO_DEPLOY_FROM }}'
-         ref: '${{ inputs.COMMITID }}'
+         #ref: '${{ inputs.BRANCH_TO_DEPLOY_FROM }}' ##changed this line to below
+         ref: '${{ inputs.COMMITID }}' ## when using specific commit such as deploying a rel tag
          fetch-tags: 'true'
          fetch-depth: 50
       - name: List-Top-Level-Contents-Of-Artifacts-Folder
