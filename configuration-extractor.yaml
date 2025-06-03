@@ -1,5 +1,5 @@
 apiNames:
-  - azurewebappistiodemo
+  - petstore-lisa
 backendNames:
   - none
 diagnosticNames:
@@ -15,8 +15,6 @@ subscriptionNames:
 tagNames:
   - none
 versionSetNames:
-  - none
-groupNames:
   - none
 PolicyFragmentNames:
   - none
