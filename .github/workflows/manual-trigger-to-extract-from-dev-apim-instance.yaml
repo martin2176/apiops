@@ -22,7 +22,7 @@ on:
         - OpenAPIV2Json
         default: OpenAPIV3Yaml
       REFERENCE_NUMBER:
-        description: 'Reference(ticket) number to include in the title of PR'     
+        description: 'Reference(ticket) number to include in the title of PR. This will be the name of feature branch'     
         required: true
         type: string
         default: '100'
@@ -32,7 +32,8 @@ concurrency:
  cancel-in-progress: false
 env:
   apiops_release_version: v6.0.1.7
-  REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH: branch-${{ github.event.inputs.REFERENCE_NUMBER }}
+  #REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH: branch-${{ github.event.inputs.REFERENCE_NUMBER }}
+  REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH: extractor-config #this will be the branch to look for the extractor configuration yaml
   PULL_REQUEST_LABEL: ticket-${{ github.event.inputs.REFERENCE_NUMBER }}
   BASE_BRANCH: dev-artifacts
   HEAD_BRANCH: branch-${{ github.event.inputs.REFERENCE_NUMBER }}
@@ -40,6 +41,7 @@ env:
   #artifacts branch dev-artifacts
   #working branch dev-working
   Logging__LogLevel__Default: ${{ vars.LOG_LEVEL }}
+  CONFIGURATION_EXTRACTOR_YAML: ${{ github.event.inputs.REFERENCE_NUMBER }}-configuration-extractor.yaml
 jobs:
   #I have to add a job which will check for existence of the HEAD_BRANCH and if doesn't exist, create the branch
   Extract-Artifacts:
@@ -75,7 +77,7 @@ jobs:
           Write-Output "User have chosen to extract Selected APIM Artifacts"
           echo "Copying extractor configuration file to runner.temp"
           #copy configuration-extractor.yaml $env:RUNNER_TEMP
-          copy configuration-extractor.yaml $env:RUNNER_TEMP/configuration-extractor.yaml
+          copy ${{ env.CONFIGURATION_EXTRACTOR_YAML }} $env:RUNNER_TEMP/configuration-extractor.yaml
           $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration-extractor.yaml"
           Write-Output "Configuration yaml path is $env:CONFIGURATION_YAML_PATH"
           Write-Output "Api management service output folder path is $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH"
@@ -122,9 +124,9 @@ jobs:
             & chmod +x "$executableFilePath"
             if ($LASTEXITCODE -ne 0) { throw "Setting file permissions failed."}
           }
-          echo "---------------------------------"
+          echo "---------------------EXTRACTOR CONFIGURATION -------------------------"
           cat $env:CONFIGURATION_YAML_PATH
-          echo "---------------------------------"
+          echo "----------------------------------------------------------------------"
           Write-Information "Running extractor..."
           & "$executableFilePath"              
           if ($LASTEXITCODE -ne 0) { throw "Running extractor failed."}
