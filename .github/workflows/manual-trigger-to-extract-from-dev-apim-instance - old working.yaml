@@ -1,5 +1,5 @@
-name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance
-run-name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance
+name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance-oldworking
+run-name: Manual-Trigger-To-Extract-From-Dev-APIM-Instance-oldworking
 #martin f kallukalam
 on:
   workflow_dispatch:
@@ -31,17 +31,15 @@ concurrency:
  group: extract-from-dev-apim-instance
  cancel-in-progress: false
 env:
-  apiops_release_version: v6.0.1.7
-  REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH: branch-${{ github.event.inputs.REFERENCE_NUMBER }}
+  apiops_release_version: v6.0.1.4
+  REFTOCHECKOUTFOR_CONFIGURATIONYAMLPATH: dev
   PULL_REQUEST_LABEL: ticket-${{ github.event.inputs.REFERENCE_NUMBER }}
   BASE_BRANCH: dev-artifacts
-  HEAD_BRANCH: branch-${{ github.event.inputs.REFERENCE_NUMBER }}
+  HEAD_BRANCH: dev-working
   #ENVIRONMENT: dev
   #artifacts branch dev-artifacts
   #working branch dev-working
-  Logging__LogLevel__Default: ${{ vars.LOG_LEVEL }}
 jobs:
-  #I have to add a job which will check for existence of the HEAD_BRANCH and if doesn't exist, create the branch
   Extract-Artifacts:
     name: Extract-Artifacts
     runs-on: ubuntu-latest
@@ -75,7 +73,7 @@ jobs:
           Write-Output "User have chosen to extract Selected APIM Artifacts"
           echo "Copying extractor configuration file to runner.temp"
           #copy configuration-extractor.yaml $env:RUNNER_TEMP
-          copy configuration-extractor.yaml $env:RUNNER_TEMP/configuration-extractor.yaml
+          copy ticket-${{ github.event.inputs.REFERENCE_NUMBER }}-configuration-extractor.yaml $env:RUNNER_TEMP/configuration-extractor.yaml
           $env:CONFIGURATION_YAML_PATH="$env:RUNNER_TEMP/configuration-extractor.yaml"
           Write-Output "Configuration yaml path is $env:CONFIGURATION_YAML_PATH"
           Write-Output "Api management service output folder path is $env:API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH"
