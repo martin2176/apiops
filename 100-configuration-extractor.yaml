@@ -1,5 +1,5 @@
 apiNames:
-  - azurewebappistiodemo
+  - petstore-lisa
 backendNames:
   - none
 diagnosticNames:
