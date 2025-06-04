@@ -1,7 +1,7 @@
 name: Commit-Trigger-To-Publish-to-Dev
 run-name: Commit-Trigger-To-Publish-to-Dev
 #author martin francis kallukalam
-#publish to dev apim instance from developer branch when a push/commit event happens on developer branch
+#publish to dev apim instance from branch-<ticket#> when a push/commit event happens to this branch
 on:
    push:
     branches-ignore:
