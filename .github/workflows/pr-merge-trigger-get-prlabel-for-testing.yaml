@@ -1,5 +1,5 @@
-name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease
-run-name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease
+name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease-Only-To-Test
+run-name: PRMerge-Trigger-To-Publish-to-Dev-Test-CreateRelease-Only-To-Test
 #author martin francis kallukalam
 on:
    pull_request:
