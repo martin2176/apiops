@@ -12,7 +12,8 @@ on:
      - 'test'
      - 'prod'
      - 'dev-working'
-     - 'dev-artifacts'   
+     - 'dev-artifacts'
+     - 'branch-100'
     paths: 
      - 'apimartifacts/**'   
 
