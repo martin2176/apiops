@@ -1,0 +1,17 @@
+<!--
+    - Policies are applied in the order they appear.
+    - Comments within policies are not preserved.
+-->
+<!-- Add policies as children to the <inbound>, <outbound>, <backend>, and <on-error> elements -->
+<policies>
+	<!-- Throttle, authorize, validate, cache, or transform the requests -->
+	<inbound />
+	<!-- Control if and how the requests are forwarded to services  -->
+	<backend>
+		<forward-request />
+	</backend>
+	<!-- Customize the responses -->
+	<outbound />
+	<!-- Handle exceptions and customize error responses  -->
+	<on-error />
+</policies>
