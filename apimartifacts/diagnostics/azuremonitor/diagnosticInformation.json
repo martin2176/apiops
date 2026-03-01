@@ -1,0 +1,48 @@
+{
+  "properties": {
+    "loggerId": "/loggers/azuremonitor",
+    "alwaysLog": "allErrors",
+    "backend": {
+      "request": {
+        "body": {
+          "bytes": 100
+        },
+        "headers": [
+          "accept-language"
+        ]
+      },
+      "response": {
+        "body": {
+          "bytes": 100
+        },
+        "headers": [
+          "accept-language"
+        ]
+      }
+    },
+    "frontend": {
+      "request": {
+        "body": {
+          "bytes": 100
+        },
+        "headers": [
+          "accept-language"
+        ]
+      },
+      "response": {
+        "body": {
+          "bytes": 100
+        },
+        "headers": [
+          "accept-language"
+        ]
+      }
+    },
+    "logClientIp": true,
+    "sampling": {
+      "percentage": 100,
+      "samplingType": "fixed"
+    },
+    "verbosity": "verbose"
+  }
+}
