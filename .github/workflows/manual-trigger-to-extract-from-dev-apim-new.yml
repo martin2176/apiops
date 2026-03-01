@@ -49,7 +49,7 @@ env:
 # CONFIGURATION_YAML_PATH: configuration-extractor-dev.yml
 jobs:
     Extract-Artifacts-from-Dev-APIM:
-     uses: martin2176/ecs-apim-workflows/.github/workflows/extract-from-dev-apim.yml@main
+     uses: martin2176/apiops/.github/workflows/extract-from-dev-apim.yml@main
      with:
       EXTRACTOR_OPTION: ${{ inputs.EXTRACTOR_OPTION }} 
       API_SPECIFICATION_FORMAT: ${{ inputs.API_SPECIFICATION_FORMAT }} 
